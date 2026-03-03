@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINDEX · IDE Financiero · v3.1</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   FINDEX v3.1 — Tokens de diseño
+   ═══════════════════════════════════════════════════ */
+:root {
+  --bg:          #0C0C0C;
+  --s0:          #111111;
+  --s1:          #161616;
+  --s2:          #1C1C1C;
+  --s3:          #222222;
+  --s4:          #2A2A2A;
+  --border:      rgba(255,255,255,0.07);
+  --border-med:  rgba(255,255,255,0.10);
+
+  --green:       #1DB954;      /* acento principal */
+  --green-dim:   rgba(29,185,84,0.10);
+  --green-glow:  rgba(29,185,84,0.18);
+  --green-line:  rgba(29,185,84,0.40);
+
+  --txt:         #E8E8E8;
+  --txt2:        #A0A0A0;
+  --txt3:        #5A5A5A;
+  --txt-inv:     #0C0C0C;
+
+  --grid:        rgba(255,255,255,0.04);
+  --grid-h:      rgba(255,255,255,0.07);
+
+  --font-ui:     'Inter', -apple-system, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+
+  --nav-h:       36px;
+  --tab-h:       32px;
+  --rib-h:       82px;
+  --fml-h:       28px;
+  --status-h:    24px;
+  --rp-w:        280px;
+
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+
+  --t: 160ms cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { font-size:13px; -webkit-font-smoothing:antialiased; height:100%; }
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--txt);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius:99px;
+  transition: background var(--t);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(29,185,84,0.5); }
+::-webkit-scrollbar-corner { background:transparent; }
+
+/* ══════════════════════════════════════════════════════
+   TITLE BAR
+   ══════════════════════════════════════════════════════ */
+#titlebar {
+  height: var(--nav-h);
+  background: var(--s0);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.tb-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 12px;
+  border-right: 1px solid var(--border);
+  height: 100%;
+}
+
+.tb-icon {
+  width: 22px; height: 22px;
+  background: var(--green);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: var(--txt-inv);
+}
+
+.tb-name {
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--txt);
+  letter-spacing: -0.01em;
+}
+
+.tb-name em { color: var(--green); font-style: normal; }
+
+.tb-file {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px;
+  height: 100%;
+  border-right: 1px solid var(--border);
+}
+
+.tb-fname {
+  font-size: 0.78rem; color: var(--txt2);
+  display: flex; align-items: center; gap: 4px;
+  cursor: pointer;
+  padding: 2px 5px; border-radius: var(--r-sm);
+  transition: all var(--t);
+}
+.tb-fname:hover { background:var(--s3); color:var(--txt); }
+.tb-fname i { font-size:0.9rem; }
+
+.tb-saved {
+  font-size: 0.68rem; color: var(--green);
+  font-family: var(--font-mono);
+  background: var(--green-dim);
+  padding: 1px 6px; border-radius: 99px;
+  border: 1px solid var(--green-line);
+}
+
+.tb-actions {
+  display: flex; align-items: center; gap: 1px;
+}
+
+.tb-btn {
+  width:28px; height:28px;
+  background:transparent; border:none;
+  color: var(--txt3); border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; cursor:pointer; transition:all var(--t);
+  position:relative;
+}
+.tb-btn:hover { background:var(--s3); color:var(--txt); }
+
+.tb-spacer { flex:1; }
+
+.tb-avatar {
+  width:26px; height:26px; border-radius:50%;
+  background: linear-gradient(135deg,#3B82F6,#8B5CF6);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.65rem; font-weight:700; color:#fff;
+}
+
+/* ══════════════════════════════════════════════════════
+   RIBBON TABS  (Office-style)
+   ══════════════════════════════════════════════════════ */
+#rib-tabs {
+  height: var(--tab-h);
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 10px;
+  gap: 0;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+#rib-tabs::-webkit-scrollbar { display:none; }
+
+.rtab {
+  padding: 0 14px;
+  height: 100%;
+  display: flex; align-items: center;
+  font-size: 0.78rem; font-weight: 500;
+  color: var(--txt3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--t);
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+.rtab:hover { color:var(--txt2); }
+.rtab.active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  background: rgba(29,185,84,0.04);
+}
+
+/* ══════════════════════════════════════════════════════
+   RIBBON BODY  (Office-style agrupado)
+   ══════════════════════════════════════════════════════ */
+#ribbon {
+  height: var(--rib-h);
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  padding: 0 4px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+#ribbon::-webkit-scrollbar { display:none; }
+
+/* Panel de tab dentro del ribbon */
+.rtab-panel { display:none; align-items:stretch; gap:0; }
+.rtab-panel.active { display:flex; }
+
+/* Grupo de botones */
+.rg {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
+  min-width: 60px;
+  position: relative;
+}
+
+/* Fila de botones dentro del grupo */
+.rg-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  flex: 1;
+  padding: 4px 4px 0;
+}
+
+/* Etiqueta de grupo — al fondo, estilo Office */
+.rg-label {
+  font-size: 0.6rem;
+  color: var(--txt3);
+  text-align: center;
+  padding: 2px 6px 3px;
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Separador vertical entre grupos */
+.rg-sep {
+  width: 1px;
+  margin: 8px 2px;
+  background: var(--border);
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ── Botón de ribbon (estilo Office: icono arriba, texto abajo) ── */
+.rb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 5px 3px;
+  min-width: 44px;
+  height: 56px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  color: var(--txt2);
+  font-size: 0.6rem;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all var(--t);
+  position: relative;
+  user-select: none;
+  white-space: nowrap;
+  line-height: 1.2;
+  text-align: center;
+}
+.rb i { font-size: 1.3rem; transition: color var(--t); }
+.rb:hover {
+  background: var(--s3);
+  border-color: var(--border-med);
+  color: var(--txt);
+}
+.rb:hover i { color: var(--green); }
+.rb:active {
+  background: var(--green-dim);
+  border-color: rgba(29,185,84,0.25);
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+}
+.rb:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+.rb.active-btn {
+  background: var(--green-dim);
+  border-color: rgba(29,185,84,0.30);
+  color: var(--green);
+}
+.rb.active-btn i { color: var(--green); }
+
+/* Botón pequeño (inline) */
+.rb.sm {
+  flex-direction: row;
+  height: 24px;
+  min-width: auto;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  gap: 4px;
+}
+.rb.sm i { font-size: 0.85rem; }
+
+/* ── Tooltip propio ── */
+.rb[data-tip]:hover::after,
+.tb-btn[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%; transform: translateX(-50%);
+  background: var(--s4);
+  color: var(--txt);
+  font-size: 0.68rem;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border-med);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════════════
+   FORMULA BAR
+   ══════════════════════════════════════════════════════ */
+#fmlbar {
+  height: var(--fml-h);
+  background: var(--s0);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#fml-ref {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--green);
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 1px 6px;
+  min-width: 52px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--t);
+}
+#fml-ref:hover { border-color: var(--green-line); background:var(--green-dim); }
+
+.fml-fx {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--txt3);
+  padding-right: 8px;
+  border-right: 1px solid var(--border);
+}
+
+#entry-line {
+  flex: 1;
+  background: transparent;
+  border: none; outline: none;
+  color: var(--txt);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  caret-color: var(--green);
+}
+
+#fml-mode {
+  font-family: var(--font-mono);
+  font-size: 0.65rem; font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--s2);
+  color: var(--txt3);
+  border: 1px solid var(--border);
+  min-width: 50px;
+  text-align: center;
+  transition: all var(--t);
+}
+#fml-mode.entry { background:var(--green-dim); color:var(--green); border-color:var(--green-line); }
+#fml-mode.cmd { background:rgba(245,158,11,0.12); color:#F59E0B; border-color:rgba(245,158,11,0.35); }
+
+/* ══════════════════════════════════════════════════════
+   APP BODY
+   ══════════════════════════════════════════════════════ */
+#app-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   SHEET AREA
+   ══════════════════════════════════════════════════════ */
+#sheet-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  background: var(--bg);
+}
+
+#sheet-scroll {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* Tabla */
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  background: var(--s1);
+  color: var(--txt3);
+  font-family: var(--font-mono);
+  font-size: 0.65rem; font-weight: 500;
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid-h);
+  text-align: center;
+  position: sticky; top: 0; z-index: 10;
+  user-select: none;
+  height: 20px;
+  padding: 0 2px;
+  transition: background var(--t);
+}
+
+th.row-h {
+  position: sticky; left: 0; top: auto; z-index: 5;
+  width: 42px; min-width: 42px;
+  border-right: 1px solid var(--grid-h);
+  font-weight: 400;
+}
+
+th.corner {
+  position: sticky; top: 0; left: 0; z-index: 20;
+  width: 42px; min-width: 42px;
+  background: var(--s1);
+  cursor: pointer;
+}
+th.corner:hover { background:var(--green-dim); color:var(--green); }
+
+th.col-hl { background:var(--green-dim) !important; color:var(--green) !important; border-bottom:1px solid var(--green-line) !important; }
+th.row-hl { background:var(--green-dim) !important; color:var(--green) !important; border-right: 1px solid var(--green-line) !important; }
+
+td {
+  background: var(--bg);
+  color: var(--txt);
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  width: 90px; min-width: 90px;
+  height: 20px;
+  padding: 0 5px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: cell;
+  user-select: none;
+  transition: background 0.07s;
+}
+
+td:hover:not(.active) { background: var(--s2); }
+td.label-cell { text-align: left; color: var(--txt2); }
+td.num-cell { text-align: right; }
+
+/* Celda activa — sutil, sin saturación excesiva */
+td.active {
+  background: var(--green-dim) !important;
+  outline: 1.5px solid var(--green);
+  outline-offset: -1px;
+  color: var(--txt) !important;
+  font-weight: 600;
+  z-index: 3;
+  position: relative;
+  box-shadow: 0 0 0 3px rgba(29,185,84,0.07);
+}
+td.active.label-cell { text-align: left; }
+td.active.num-cell   { text-align: right; }
+
+/* Alternancia sutil */
+tr:nth-child(even) td { background: rgba(255,255,255,0.008); }
+tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
+
+/* ══════════════════════════════════════════════════════
+   PANEL DERECHO
+   ══════════════════════════════════════════════════════ */
+#rpanel {
+  width: var(--rp-w);
+  min-width: var(--rp-w);
+  background: var(--s1);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width var(--t), min-width var(--t);
+}
+#rpanel.closed { width:0; min-width:0; border-left:none; overflow:hidden; }
+
+.rp-head {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--s2);
+  flex-shrink: 0;
+}
+.rp-head-title {
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--txt);
+  display: flex; align-items: center; gap: 5px;
+}
+.rp-head-title i { color:var(--green); font-size:0.95rem; }
+
+.rp-close {
+  width:22px; height:22px;
+  background:transparent; border:none;
+  color:var(--txt3); border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.85rem; cursor:pointer; transition:all var(--t);
+}
+.rp-close:hover { background:rgba(239,68,68,0.12); color:#EF4444; }
+
+/* Tabs del panel */
+.rp-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--s1);
+  flex-shrink: 0;
+}
+.rp-tab {
+  flex:1; padding:5px 4px;
+  text-align:center;
+  font-size:0.62rem; font-weight:600;
+  letter-spacing:0.05em; text-transform:uppercase;
+  color:var(--txt3); cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all var(--t);
+  background:transparent; border-top:none; border-left:none; border-right:none;
+  user-select:none;
+}
+.rp-tab.active { color:var(--green); border-bottom-color:var(--green); background:var(--green-dim); }
+.rp-tab:hover:not(.active) { color:var(--txt2); background:var(--s2); }
+
+.rp-body { flex:1; overflow-y:auto; }
+
+.rp-section { padding:10px; border-bottom:1px solid var(--border); }
+.rp-section:last-child { border-bottom:none; }
+
+.rp-stitle {
+  font-size:0.62rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--txt3); margin-bottom:8px;
+  display:flex; align-items:center; gap:4px;
+}
+.rp-stitle i { color:var(--green); font-size:0.8rem; }
+
+/* Grilla de info de celda */
+.ci-grid {
+  display:grid; grid-template-columns:52px 1fr;
+  gap:3px 6px; align-items:center;
+}
+.ci-key {
+  font-size:0.62rem; color:var(--txt3); font-family:var(--font-mono);
+}
+.ci-val {
+  font-family:var(--font-mono); font-size:0.7rem; color:var(--txt);
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:var(--r-sm); padding:1px 5px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.ci-val.accent { color:var(--green); border-color:var(--green-dim); background:var(--green-dim); font-weight:600; }
+
+/* Tarjetas de funciones */
+.fn-card {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 7px 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all var(--t);
+  border-left: 2px solid transparent;
+}
+.fn-card:hover { background:var(--s3); border-left-color:var(--green); transform:translateX(2px); }
+.fn-card:last-child { margin-bottom:0; }
+
+.fn-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
+.fn-name {
+  font-family:var(--font-mono); font-size:0.7rem; font-weight:600;
+  color:var(--green);
+  background:var(--green-dim); border:1px solid var(--green-dim);
+  border-radius:var(--r-sm); padding:1px 5px;
+}
+.fn-syn { font-family:var(--font-mono); font-size:0.62rem; color:var(--txt2); }
+.fn-desc { font-size:0.62rem; color:var(--txt3); line-height:1.4; }
+.fn-ex { font-family:var(--font-mono); font-size:0.6rem; color:var(--txt3); margin-top:2px; font-style:italic; }
+
+/* ══════════════════════════════════════════════════════
+   STATUS BAR
+   ══════════════════════════════════════════════════════ */
+#statusbar {
+  height: var(--status-h);
+  background: var(--s0);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 10px; gap: 14px;
+  flex-shrink: 0;
+  font-size: 0.62rem; color:var(--txt3);
+  font-family: var(--font-mono);
+}
+
+.sb-tabs { display:flex; gap:1px; flex:1; }
+.sb-tab {
+  padding:2px 8px; font-size:0.62rem; color:var(--txt3);
+  cursor:pointer; border-radius:var(--r-sm);
+  transition:all var(--t); user-select:none;
+  display:flex; align-items:center; gap:3px;
+}
+.sb-tab.active { background:var(--green-dim); color:var(--green); font-weight:600; }
+.sb-tab:hover:not(.active) { background:var(--s3); color:var(--txt2); }
+
+.sb-add {
+  width:18px; height:18px; background:transparent; border:none;
+  color:var(--txt3); font-size:0.9rem;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--r-sm); cursor:pointer; transition:all var(--t);
+}
+.sb-add:hover { background:var(--green-dim); color:var(--green); }
+
+.sb-right { display:flex; align-items:center; gap:8px; }
+.sb-chip {
+  padding:1px 6px;
+  background:var(--s2); border:1px solid var(--border);
+  border-radius:99px; font-size:0.6rem; color:var(--txt2);
+}
+.sb-chip.g { color:var(--green); background:var(--green-dim); border-color:var(--green-dim); }
+
+/* ══════════════════════════════════════════════════════
+   TOAST
+   ══════════════════════════════════════════════════════ */
+#toast {
+  position:fixed; bottom:36px; left:50%;
+  transform:translateX(-50%) translateY(10px);
+  background:var(--s3);
+  border:1px solid var(--border-med);
+  border-radius:99px; padding:5px 14px;
+  font-size:0.72rem; color:var(--txt);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.18s, transform 0.18s;
+  display:flex; align-items:center; gap:6px;
+  z-index:9000;
+}
+#toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
+.toast-dot { width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
+.toast-dot.err { background:#EF4444; }
+.toast-dot.warn { background:#F59E0B; }
+
+/* ══════════════════════════════════════════════════════
+   CONTENIDO PANEL — Tab 0, 1 (ocultar/mostrar)
+   ══════════════════════════════════════════════════════ */
+.rp-pane { display:none; }
+.rp-pane.active { display:block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(4px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.rp-pane.active { animation: fadeUp 0.18s ease; }
+</style>
+</head>
+<body>
+
+<!-- ═══════ TITLE BAR ═══════ -->
+<div id="titlebar">
+  <div class="tb-logo">
+    <div class="tb-icon">F</div>
+    <span class="tb-name">FIN<em>DEX</em></span>
+    <span style="font-size:0.62rem;color:var(--txt3);font-family:var(--font-mono);margin-left:2px">v3.1</span>
+  </div>
+  <div class="tb-file">
+    <div class="tb-fname"><i class="mdi mdi-file-document-outline"></i> Modelo_Financiero.fx</div>
+    <span class="tb-saved" id="saved-lbl">✓ Guardado</span>
+  </div>
+  <div class="tb-actions">
+    <button class="tb-btn" data-tip="Deshacer (Ctrl+Z)"><i class="mdi mdi-undo"></i></button>
+    <button class="tb-btn" data-tip="Rehacer (Ctrl+Y)"><i class="mdi mdi-redo"></i></button>
+    <button class="tb-btn" data-tip="Guardar (Ctrl+S)" onclick="toast('Guardado','ok')"><i class="mdi mdi-content-save-outline"></i></button>
+    <button class="tb-btn" data-tip="Exportar CSV" onclick="exportCSV()"><i class="mdi mdi-download-outline"></i></button>
+  </div>
+  <div class="tb-spacer"></div>
+  <div class="tb-avatar">JD</div>
+</div>
+
+<!-- ═══════ RIBBON TABS ═══════ -->
+<div id="rib-tabs">
+  <div class="rtab active" onclick="switchTab(0,this)">Inicio</div>
+  <div class="rtab" onclick="switchTab(1,this)">Insertar</div>
+  <div class="rtab" onclick="switchTab(2,this)">Fórmulas</div>
+  <div class="rtab" onclick="switchTab(3,this)">Datos</div>
+  <div class="rtab" onclick="switchTab(4,this)">Vista</div>
+</div>
+
+<!-- ═══════ RIBBON ═══════ -->
+<div id="ribbon">
+
+  <!-- TAB 0 · INICIO -->
+  <div class="rtab-panel active" id="rt-0">
+    <!-- Archivo -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="Nuevo archivo (Ctrl+N)&#10;Crea una hoja en blanco"><i class="mdi mdi-file-plus-outline"></i>Nuevo</button>
+        <button class="rb" data-tip="Abrir archivo existente&#10;Carga un .fx o .csv"><i class="mdi mdi-folder-open-outline"></i>Abrir</button>
+        <button class="rb" data-tip="Guardar (Ctrl+S)&#10;Guarda el modelo actual" onclick="toast('Guardado','ok')"><i class="mdi mdi-content-save-outline"></i>Guardar</button>
+      </div>
+      <div class="rg-label">Archivo</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Edición -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="Cortar (Ctrl+X)"><i class="mdi mdi-content-cut"></i>Cortar</button>
+        <button class="rb" data-tip="Copiar (Ctrl+C)"><i class="mdi mdi-content-copy"></i>Copiar</button>
+        <button class="rb" data-tip="Pegar (Ctrl+V)"><i class="mdi mdi-content-paste"></i>Pegar</button>
+      </div>
+      <div class="rg-label">Edición</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Navegar -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="Ir a celda (Ctrl+G)&#10;Navega directamente a una referencia" onclick="toast('Ir a celda — escribe la ref en la barra de fórmulas')"><i class="mdi mdi-crosshairs-gps"></i>Ir a</button>
+        <button class="rb" data-tip="Ir a A1 (Home)&#10;Vuelve al inicio de la hoja" onclick="moveTo(0,0)"><i class="mdi mdi-home-outline"></i>Inicio</button>
+        <button class="rb danger" data-tip="Borrar celda (Delete)&#10;Elimina el contenido sin formato" onclick="deleteCell()"><i class="mdi mdi-delete-outline"></i>Borrar</button>
+      </div>
+      <div class="rg-label">Navegar</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Vista -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb active-btn" id="rb-panel" data-tip="Mostrar / ocultar panel lateral&#10;Muestra información de celda y funciones" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel</button>
+        <button class="rb" data-tip="Recalcular todas las fórmulas (F9)&#10;Fuerza re-evaluación de la hoja" onclick="recalcAll()"><i class="mdi mdi-refresh"></i>Recalc</button>
+      </div>
+      <div class="rg-label">Vista</div>
+    </div>
+  </div>
+
+  <!-- TAB 1 · INSERTAR -->
+  <div class="rtab-panel" id="rt-1">
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip='Insertar etiqueta de texto&#10;Prefijo: " (comillas)&#10;Ej: "Ventas enero'><i class="mdi mdi-format-text"></i>Etiqueta</button>
+        <button class="rb" data-tip="Insertar número&#10;Escribe directamente el valor&#10;Ej: 150000"><i class="mdi mdi-numeric"></i>Número</button>
+        <button class="rb" data-tip="Insertar fórmula Findex&#10;Prefijos: @ = +&#10;Ej: @SUM(A1:A10)"><i class="mdi mdi-function-variant"></i>Fórmula</button>
+      </div>
+      <div class="rg-label">Insertar</div>
+    </div>
+  </div>
+
+  <!-- TAB 2 · FÓRMULAS -->
+  <div class="rtab-panel" id="rt-2">
+    <!-- Estadística -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="@SUM(rango)&#10;Suma de un rango o lista&#10;Ej: @SUM(A1:A12)&#10;También: @SUM(1000;A1:A5;2000)" onclick="insertFn('@SUM(')"><i class="mdi mdi-sigma"></i>@SUM</button>
+        <button class="rb" data-tip="@AVG(rango)&#10;Promedio aritmético&#10;Ej: @AVG(B2:B13)&#10;Promedio de ventas mensuales" onclick="insertFn('@AVG(')"><i class="mdi mdi-division"></i>@AVG</button>
+        <button class="rb" data-tip="@MIN(rango)&#10;Valor mínimo del rango&#10;Ej: @MIN(A1:A5)&#10;Mes con menor rendimiento" onclick="insertFn('@MIN(')"><i class="mdi mdi-chevron-triple-down"></i>@MIN</button>
+        <button class="rb" data-tip="@MAX(rango)&#10;Valor máximo del rango&#10;Ej: @MAX(A1:A5)&#10;Pico de venta o costo" onclick="insertFn('@MAX(')"><i class="mdi mdi-chevron-triple-up"></i>@MAX</button>
+        <button class="rb" data-tip="@COUNT(rango)&#10;Cuenta celdas con datos&#10;Ej: @COUNT(A1:A100)&#10;Meses activos, clientes, ítems" onclick="insertFn('@COUNT(')"><i class="mdi mdi-counter"></i>@COUNT</button>
+      </div>
+      <div class="rg-label">Estadística</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Matemáticas -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="@ROUND(valor;decimales)&#10;Redondea al nº de decimales&#10;Ej: @ROUND(A1*1,19;0)&#10;Montos finales en CLP enteros" onclick="insertFn('@ROUND(')"><i class="mdi mdi-decimal"></i>@ROUND</button>
+        <button class="rb" data-tip="@INT(valor)&#10;Trunca la parte decimal (hacia abajo)&#10;Ej: @INT(D5*1.19)&#10;Reajustes UF parciales" onclick="insertFn('@INT(')"><i class="mdi mdi-numeric-0-box-outline"></i>@INT</button>
+        <button class="rb" data-tip="@ABS(valor)&#10;Valor absoluto (sin signo)&#10;Ej: @ABS(E3-E4)&#10;Desviaciones real vs presupuestado" onclick="insertFn('@ABS(')"><i class="mdi mdi-plus-minus-variant"></i>@ABS</button>
+        <button class="rb" data-tip="@SQRT(valor)&#10;Raíz cuadrada&#10;Ej: @SQRT(C5)&#10;Desviación estándar manual" onclick="insertFn('@SQRT(')"><i class="mdi mdi-square-root"></i>@SQRT</button>
+        <button class="rb" data-tip="@RAND&#10;Número aleatorio entre 0 y 1&#10;Ej: @ROUND(@RAND*1000;0)&#10;Simulación de escenarios" onclick="insertFn('@RAND')"><i class="mdi mdi-dice-multiple-outline"></i>@RAND</button>
+      </div>
+      <div class="rg-label">Matemáticas</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Avanzadas -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="@EXP(valor)&#10;Número e elevado al valor&#10;Ej: @EXP(tasa/12)&#10;Proyecciones de crecimiento compuesto" onclick="insertFn('@EXP(')"><i class="mdi mdi-trending-up"></i>@EXP</button>
+        <button class="rb" data-tip="@LN(valor)&#10;Logaritmo natural&#10;Ej: @LN(D3)&#10;Tendencias y elasticidad" onclick="insertFn('@LN(')"><i class="mdi mdi-math-log"></i>@LN</button>
+      </div>
+      <div class="rg-label">Avanzadas</div>
+    </div>
+    <div class="rg-sep"></div>
+    <!-- Sintaxis -->
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb sm" data-tip="Modo Findex: @SUM(A1:A10)&#10;También: @AVG @MIN @MAX @COUNT">@fn(...)</button>
+        <button class="rb sm" data-tip="Fórmula clásica: =A1+B2&#10;VisiCalc: +A1*B2">=expr</button>
+      </div>
+      <div class="rg-row" style="padding-top:0">
+        <button class="rb sm" data-tip='Label explícito: "Ventas&#10;El texto se alinea a la izquierda'>"label</button>
+        <button class="rb sm" data-tip="Rango: A1:A10&#10;Lista: A1;B2;C3&#10;Relativo: +1:+5">rango</button>
+      </div>
+      <div class="rg-label">Sintaxis</div>
+    </div>
+  </div>
+
+  <!-- TAB 3 · DATOS -->
+  <div class="rtab-panel" id="rt-3">
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="Importar CSV&#10;Carga datos desde archivo externo" onclick="toast('Importar CSV — próximamente','warn')"><i class="mdi mdi-file-import-outline"></i>Importar</button>
+        <button class="rb" data-tip="Exportar a CSV&#10;Descarga los datos de la hoja" onclick="exportCSV()"><i class="mdi mdi-file-export-outline"></i>Exportar</button>
+      </div>
+      <div class="rg-label">Datos externos</div>
+    </div>
+    <div class="rg-sep"></div>
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb" data-tip="Recalcular todas las fórmulas&#10;Fuerza re-evaluación completa" onclick="recalcAll()"><i class="mdi mdi-refresh"></i>Recalc</button>
+        <button class="rb" data-tip="Ir a última celda usada&#10;Combinación End+Home (Lotus)&#10;Shortcut: End → Home" onclick="lastUsedCell()"><i class="mdi mdi-arrow-bottom-right-bold-outline"></i>Fin</button>
+      </div>
+      <div class="rg-label">Herramientas</div>
+    </div>
+  </div>
+
+  <!-- TAB 4 · VISTA -->
+  <div class="rtab-panel" id="rt-4">
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb active-btn" id="rb-panel2" data-tip="Mostrar / ocultar panel lateral" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel</button>
+        <button class="rb" data-tip="Ir a A1 (Home)&#10;Regresa al origen de la hoja" onclick="moveTo(0,0)"><i class="mdi mdi-home-outline"></i>A1</button>
+      </div>
+      <div class="rg-label">Panel</div>
+    </div>
+    <div class="rg-sep"></div>
+    <div class="rg">
+      <div class="rg-row">
+        <button class="rb sm" data-tip="254 filas × 63 columnas&#10;= 16.002 celdas totales">254×63</button>
+      </div>
+      <div class="rg-row" style="padding-top:0">
+        <button class="rb sm" data-tip="Motor Findex v2.1&#10;12 funciones integradas">v2.1</button>
+      </div>
+      <div class="rg-label">Info</div>
+    </div>
+  </div>
+
+</div><!-- #ribbon -->
+
+<!-- ═══════ FORMULA BAR ═══════ -->
+<div id="fmlbar">
+  <div id="fml-ref">A1</div>
+  <span class="fml-fx">ƒx</span>
+  <input id="entry-line" type="text" readonly autocomplete="off" spellcheck="false"
+         placeholder="valor · =A1+B2 · @SUM(A1:A10) · &quot;etiqueta">
+  <span id="fml-mode">LISTO</span>
+</div>
+
+<!-- ═══════ APP BODY ═══════ -->
+<div id="app-body">
+
+  <!-- Planilla -->
+  <div id="sheet-area">
+    <div id="sheet-scroll">
+      <table id="sheet-table"><tbody id="sheet-body"></tbody></table>
+    </div>
+  </div>
+
+  <!-- Panel derecho (abierto por defecto) -->
+  <div id="rpanel">
+    <div class="rp-head">
+      <div class="rp-head-title"><i class="mdi mdi-view-dashboard-outline"></i> Asistente</div>
+      <button class="rp-close" onclick="closePanel()"><i class="mdi mdi-close"></i></button>
+    </div>
+    <div class="rp-tabs">
+      <button class="rp-tab active" onclick="rpTab(0,this)">Celda</button>
+      <button class="rp-tab" onclick="rpTab(1,this)">Funciones</button>
+      <button class="rp-tab" onclick="rpTab(2,this)">Atajos</button>
+    </div>
+    <div class="rp-body">
+
+      <!-- Pane 0 · Celda activa -->
+      <div class="rp-pane active" id="rpp-0">
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-table-edit"></i>Celda activa</div>
+          <div class="ci-grid">
+            <span class="ci-key">Referencia</span><span class="ci-val accent" id="si-ref">A1</span>
+            <span class="ci-key">Tipo</span>      <span class="ci-val" id="si-type">—</span>
+            <span class="ci-key">Fórmula raw</span><span class="ci-val" id="si-raw">—</span>
+            <span class="ci-key">Valor</span>     <span class="ci-val accent" id="si-val">—</span>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-chart-donut"></i>Resumen hoja</div>
+          <div class="ci-grid">
+            <span class="ci-key">Con datos</span> <span class="ci-val accent" id="si-used">0</span>
+            <span class="ci-key">Fórmulas</span>  <span class="ci-val" id="si-fml">0</span>
+            <span class="ci-key">Etiquetas</span> <span class="ci-val" id="si-lbl">0</span>
+            <span class="ci-key">Dimensiones</span><span class="ci-val">254 × 63</span>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-keyboard-outline"></i>Modo actual</div>
+          <div class="ci-grid">
+            <span class="ci-key">Estado</span><span class="ci-val accent" id="si-mode">LISTO</span>
+            <span class="ci-key">Posición</span><span class="ci-val" id="si-pos">0,0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pane 1 · Funciones de referencia -->
+      <div class="rp-pane" id="rpp-1">
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-function-variant"></i>Estadística</div>
+          <div class="fn-card" onclick="insertFn('@SUM(')">
+            <div class="fn-top"><span class="fn-name">@SUM</span><span class="fn-syn">@SUM(A1:A12)</span></div>
+            <div class="fn-desc">Suma rango, lista o valores mixtos</div>
+            <div class="fn-ex">@SUM(ingresos) · @SUM(1000;A1:A5)</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@AVG(')">
+            <div class="fn-top"><span class="fn-name">@AVG</span><span class="fn-syn">@AVG(B2:B13)</span></div>
+            <div class="fn-desc">Promedio aritmético del rango</div>
+            <div class="fn-ex">@AVG(costo unitario) · @AVG(A1:A12)</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@MIN(')">
+            <div class="fn-top"><span class="fn-name">@MIN</span><span class="fn-syn">@MIN(A1:A5)</span></div>
+            <div class="fn-desc">Valor mínimo del rango</div>
+            <div class="fn-ex">Mes o producto con menor rendimiento</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@MAX(')">
+            <div class="fn-top"><span class="fn-name">@MAX</span><span class="fn-syn">@MAX(A1:A5)</span></div>
+            <div class="fn-desc">Valor máximo del rango</div>
+            <div class="fn-ex">Pico de costo o venta máxima</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@COUNT(')">
+            <div class="fn-top"><span class="fn-name">@COUNT</span><span class="fn-syn">@COUNT(A1:A100)</span></div>
+            <div class="fn-desc">Cuenta celdas con datos</div>
+            <div class="fn-ex">Meses activos, clientes, ítems vendidos</div>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-calculator-variant-outline"></i>Matemáticas</div>
+          <div class="fn-card" onclick="insertFn('@ROUND(')">
+            <div class="fn-top"><span class="fn-name">@ROUND</span><span class="fn-syn">@ROUND(A1*1,19;0)</span></div>
+            <div class="fn-desc">Redondea a N decimales</div>
+            <div class="fn-ex">Montos CLP enteros, reportes</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@INT(')">
+            <div class="fn-top"><span class="fn-name">@INT</span><span class="fn-syn">@INT(D5*1.19)</span></div>
+            <div class="fn-desc">Trunca la parte decimal</div>
+            <div class="fn-ex">Cálculos fiscales, reajuste UF</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@ABS(')">
+            <div class="fn-top"><span class="fn-name">@ABS</span><span class="fn-syn">@ABS(E3-E4)</span></div>
+            <div class="fn-desc">Valor absoluto (sin signo negativo)</div>
+            <div class="fn-ex">Variaciones real vs presupuestado</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@SQRT(')">
+            <div class="fn-top"><span class="fn-name">@SQRT</span><span class="fn-syn">@SQRT(C5)</span></div>
+            <div class="fn-desc">Raíz cuadrada del valor</div>
+            <div class="fn-ex">Desviación estándar manual</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@RAND')">
+            <div class="fn-top"><span class="fn-name">@RAND</span><span class="fn-syn">@ROUND(@RAND*1000;0)</span></div>
+            <div class="fn-desc">Número aleatorio entre 0 y 1</div>
+            <div class="fn-ex">Simulaciones de riesgo o escenarios</div>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-chart-bell-curve"></i>Avanzadas</div>
+          <div class="fn-card" onclick="insertFn('@EXP(')">
+            <div class="fn-top"><span class="fn-name">@EXP</span><span class="fn-syn">@EXP(D3)</span></div>
+            <div class="fn-desc">e elevado al valor (exponencial)</div>
+            <div class="fn-ex">Proyecciones de crecimiento compuesto</div>
+          </div>
+          <div class="fn-card" onclick="insertFn('@LN(')">
+            <div class="fn-top"><span class="fn-name">@LN</span><span class="fn-syn">@LN(D3)</span></div>
+            <div class="fn-desc">Logaritmo natural</div>
+            <div class="fn-ex">Tendencias logarítmicas, elasticidad</div>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-code-braces"></i>Sintaxis especial</div>
+          <div class="fn-card">
+            <div class="fn-top"><span class="fn-name" style="background:rgba(59,130,246,0.12);color:#3B82F6;border-color:rgba(59,130,246,0.2)">Rango 2D</span></div>
+            <div class="fn-desc">A1:C10 — rango rectangular</div>
+          </div>
+          <div class="fn-card">
+            <div class="fn-top"><span class="fn-name" style="background:rgba(59,130,246,0.12);color:#3B82F6;border-color:rgba(59,130,246,0.2)">Relativo</span></div>
+            <div class="fn-desc">+1:+5 — relativo a la fila actual</div>
+          </div>
+          <div class="fn-card">
+            <div class="fn-top"><span class="fn-name" style="background:rgba(59,130,246,0.12);color:#3B82F6;border-color:rgba(59,130,246,0.2)">Abierto</span></div>
+            <div class="fn-desc">A1: — hasta la última celda con dato</div>
+          </div>
+          <div class="fn-card">
+            <div class="fn-top"><span class="fn-name" style="background:rgba(245,158,11,0.12);color:#F59E0B;border-color:rgba(245,158,11,0.2)">Anidado</span></div>
+            <div class="fn-desc">@SUM(A1:A5;@ROUND(B1;0))</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pane 2 · Atajos de teclado -->
+      <div class="rp-pane" id="rpp-2">
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-keyboard"></i>Navegación</div>
+          <div class="ci-grid">
+            <span class="ci-key">Flechas</span><span class="ci-val">Mover celda</span>
+            <span class="ci-key">Tab</span><span class="ci-val">→ derecha</span>
+            <span class="ci-key">Shift+Tab</span><span class="ci-val">← izquierda</span>
+            <span class="ci-key">Home</span><span class="ci-val">Ir a A1</span>
+            <span class="ci-key">AvPág</span><span class="ci-val">Página abajo</span>
+            <span class="ci-key">RePág</span><span class="ci-val">Página arriba</span>
+            <span class="ci-key">Ctrl+↓↑←→</span><span class="ci-val">Salto de bloque</span>
+            <span class="ci-key">End</span><span class="ci-val">Modo FIN (Lotus)</span>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-pencil"></i>Edición</div>
+          <div class="ci-grid">
+            <span class="ci-key">Enter / F2</span><span class="ci-val">Iniciar edición</span>
+            <span class="ci-key">Escape</span><span class="ci-val">Cancelar</span>
+            <span class="ci-key">Delete</span><span class="ci-val">Borrar celda</span>
+            <span class="ci-key">Cualquier tecla</span><span class="ci-val">Sobreescribir</span>
+          </div>
+        </div>
+        <div class="rp-section">
+          <div class="rp-stitle"><i class="mdi mdi-function-variant"></i>Prefijos de fórmula</div>
+          <div class="ci-grid">
+            <span class="ci-key">@SUM(...</span><span class="ci-val">Motor Findex</span>
+            <span class="ci-key">=A1+B2</span><span class="ci-val">Clásico</span>
+            <span class="ci-key">+A1*B2</span><span class="ci-val">VisiCalc</span>
+            <span class="ci-key">"texto</span><span class="ci-val">Label explícito</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- rp-body -->
+  </div><!-- #rpanel -->
+</div><!-- #app-body -->
+
+<!-- ═══════ STATUS BAR ═══════ -->
+<div id="statusbar">
+  <div class="sb-tabs">
+    <div class="sb-tab active"><i class="mdi mdi-table" style="font-size:0.8rem"></i> Hoja 1</div>
+    <div class="sb-tab"><i class="mdi mdi-table" style="font-size:0.8rem"></i> Hoja 2</div>
+    <button class="sb-add"><i class="mdi mdi-plus"></i></button>
+  </div>
+  <div class="sb-right">
+    <span id="sb-cnt">0 celdas</span>
+    <span class="sb-chip g" id="sb-ref">A1</span>
+    <span class="sb-chip" id="sb-val">—</span>
+    <span class="sb-chip">254×63</span>
+    <span class="sb-chip g">Motor v2.1</span>
+  </div>
+</div>
+
+<div id="toast"><div class="toast-dot" id="toast-dot"></div><span id="toast-msg"></span></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MOTOR FINDEX v2.1 — JavaScript completo (intacto del original)
+     + UI enhancements (panel, ribbon, status bar sync)
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ════════════════════════════════════════════════
+//  MOTOR FINDEX v2.1
+// ════════════════════════════════════════════════
+
+const ROWS = 254;
+const COLS = 63;
+
+const cells = {};
+let curRow = 0;
+let curCol = 0;
+let mode   = 'READY';
+let editBuf = '';
+
+const elRef    = document.getElementById('fml-ref');
+const elEntry  = document.getElementById('entry-line');
+const elMode   = document.getElementById('fml-mode');
+const elScroll = document.getElementById('sheet-scroll');
+const elBody   = document.getElementById('sheet-body');
+
+const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function colLabel(c) {
+    if (c < 26) return ALPHA[c];
+    return ALPHA[Math.floor(c / 26) - 1] + ALPHA[c % 26];
+}
+
+function cellId(r, c) { return colLabel(c) + (r + 1); }
+
+function parseRef(ref) {
+    const m = ref.match(/^([A-Z]{1,2})(\d+)$/);
+    if (!m) return null;
+    const colStr = m[1];
+    const rowNum = parseInt(m[2]) - 1;
+    let colNum;
+    if (colStr.length === 1) {
+        colNum = ALPHA.indexOf(colStr);
+    } else {
+        colNum = (ALPHA.indexOf(colStr[0]) + 1) * 26 + ALPHA.indexOf(colStr[1]);
+    }
+    return { r: rowNum, c: colNum };
+}
+
+// ── Motor Findex ──
+function fxColIdx(s) {
+    let n = 0;
+    for (let i = 0; i < s.length; i++) n = n * 26 + (s.charCodeAt(i) - 64);
+    return n - 1;
+}
+
+function fxParseRef(ref, fr, fc) {
+    ref = ref.trim();
+    if (!ref) return null;
+    if (/^[+\-]\d+$/.test(ref)) return { fila: fr + parseInt(ref), columna: fc };
+    const m = ref.match(/^\$?([A-Z]+)\$?(\d+)$/);
+    if (m) return { fila: parseInt(m[2]) - 1, columna: fxColIdx(m[1]) };
+    return null;
+}
+
+function fxGetVal(g, fila, col) {
+    if (fila < 0 || fila >= g.length || col < 0 || col >= g[0].length) return null;
+    const v = g[fila][col];
+    return (typeof v === 'number' && isFinite(v)) ? v : null;
+}
+
+function fxRango(spec, g, fr, fc) {
+    const pos = [];
+    spec = spec.trim();
+    if (!spec) return pos;
+    const rel = spec.match(/^([+\-]\d+):([+\-]\d+)$/);
+    if (rel) {
+        const a = fr + parseInt(rel[1]), b = fr + parseInt(rel[2]);
+        for (let f = Math.min(a,b); f <= Math.max(a,b); f++) pos.push({fila:f, columna:fc});
+        return pos;
+    }
+    const ab = spec.match(/^(\$?[A-Z]+\$?\d+):$/);
+    if (ab) {
+        const ini = fxParseRef(ab[1], fr, fc);
+        if (!ini) return pos;
+        let fin = ini.fila;
+        for (let f = g.length-1; f >= ini.fila; f--) {
+            if (fxGetVal(g, f, ini.columna) !== null) { fin = f; break; }
+        }
+        for (let f = ini.fila; f <= fin; f++) pos.push({fila:f, columna:ini.columna});
+        return pos;
+    }
+    if (spec.includes(':')) {
+        const parts = spec.split(':');
+        if (parts.length !== 2) return pos;
+        const ini = fxParseRef(parts[0], fr, fc);
+        const fin = fxParseRef(parts[1], fr, fc);
+        if (!ini || !fin) return pos;
+        for (let f = Math.min(ini.fila,fin.fila); f <= Math.max(ini.fila,fin.fila); f++)
+            for (let c = Math.min(ini.columna,fin.columna); c <= Math.max(ini.columna,fin.columna); c++)
+                pos.push({fila:f, columna:c});
+        return pos;
+    }
+    const r = fxParseRef(spec, fr, fc);
+    if (r) pos.push(r);
+    return pos;
+}
+
+function fxExpr(expr) {
+    if (!expr) return null;
+    expr = expr.replace(/,/g, '.').replace(/\s/g, '');
+    if (!/^[\d\+\-\*\/\(\)\.]+$/.test(expr)) return null;
+    try {
+        const r = Function('"use strict"; return (' + expr + ')')();
+        return isFinite(r) ? r : null;
+    } catch(e) { return null; }
+}
+
+function fxArgs(argsStr, g, fr, fc) {
+    const vals = [];
+    if (!argsStr || !argsStr.trim()) return vals;
+    const segs = [];
+    let depth = 0, ini = 0;
+    for (let i = 0; i < argsStr.length; i++) {
+        if (argsStr[i] === '(') depth++;
+        if (argsStr[i] === ')') depth--;
+        if (argsStr[i] === ';' && depth === 0) {
+            segs.push(argsStr.substring(ini, i).trim());
+            ini = i + 1;
+        }
+    }
+    segs.push(argsStr.substring(ini).trim());
+    for (const seg of segs) {
+        if (!seg) continue;
+        if (seg[0] === '@') {
+            const v = fxEval(seg, g, fr, fc);
+            if (typeof v === 'number' && isFinite(v)) vals.push(v);
+            continue;
+        }
+        if (seg.includes(':')) {
+            for (const p of fxRango(seg, g, fr, fc)) {
+                const v = fxGetVal(g, p.fila, p.columna);
+                if (v !== null) vals.push(v);
+            }
+            continue;
+        }
+        if (/[\+\-\*\/]/.test(seg)) {
+            const expr = seg.replace(/\$?[A-Z]{1,2}\$?\d+/g, ref => {
+                const p = fxParseRef(ref, fr, fc);
+                if (!p) return '0';
+                const v = fxGetVal(g, p.fila, p.columna);
+                return v !== null ? String(v) : '0';
+            });
+            const v = fxExpr(expr);
+            if (v !== null) vals.push(v);
+            continue;
+        }
+        const ref = fxParseRef(seg, fr, fc);
+        if (ref) {
+            const v = fxGetVal(g, ref.fila, ref.columna);
+            if (v !== null) vals.push(v);
+            continue;
+        }
+        const n = parseFloat(seg.replace(',', '.'));
+        if (!isNaN(n)) vals.push(n);
+    }
+    return vals;
+}
+
+function fxEval(formula, g, fr, fc) {
+    formula = (formula || '').trim();
+    if (!formula || formula[0] !== '@') {
+        if (!g) { g = fxBuildGrid(); fr = curRow; fc = curCol; }
+        const ref = fxParseRef(formula, fr, fc);
+        if (ref) { const v = fxGetVal(g, ref.fila, ref.columna); return v !== null ? v : 0; }
+        const n = parseFloat(formula.replace(',', '.'));
+        return isNaN(n) ? NaN : n;
+    }
+    if (!g) { g = fxBuildGrid(); fr = curRow; fc = curCol; }
+    let depth = 0, ini2 = 0;
+    const terminos = [], operadores = [];
+    for (let i = 0; i < formula.length; i++) {
+        if (formula[i] === '(') depth++;
+        else if (formula[i] === ')') depth--;
+        else if (depth === 0 && i > 0 && '+-*/'.includes(formula[i])) {
+            terminos.push(formula.substring(ini2, i).trim());
+            operadores.push(formula[i]);
+            ini2 = i + 1;
+        }
+    }
+    terminos.push(formula.substring(ini2).trim());
+    if (terminos.length > 1) {
+        const valores = terminos.map(t => fxEval(t, g, fr, fc));
+        if (valores.some(v => isNaN(v))) return NaN;
+        let resultado = valores[0];
+        for (let i = 0; i < operadores.length; i++) {
+            switch (operadores[i]) {
+                case '+': resultado += valores[i+1]; break;
+                case '-': resultado -= valores[i+1]; break;
+                case '*': resultado *= valores[i+1]; break;
+                case '/': if (valores[i+1] === 0) return NaN;
+                          resultado /= valores[i+1]; break;
+            }
+        }
+        return resultado;
+    }
+    const m = formula.match(/^@([A-Z]+)\(([\s\S]*)\)$/);
+    if (!m) return NaN;
+    const fn   = m[1].toUpperCase();
+    const args = m[2];
+    if (fn === 'RAND') return Math.random();
+    const vals = fxArgs(args, g, fr, fc);
+    switch (fn) {
+        case 'SUM':   return vals.reduce((a,v) => a+v, 0);
+        case 'AVG':   if (!vals.length) return NaN;
+                      return vals.reduce((a,v) => a+v, 0) / vals.length;
+        case 'MIN':   if (!vals.length) return NaN; return Math.min(...vals);
+        case 'MAX':   if (!vals.length) return NaN; return Math.max(...vals);
+        case 'INT':   if (!vals.length) return NaN; return Math.trunc(vals[0]);
+        case 'ABS':   if (!vals.length) return NaN; return Math.abs(vals[0]);
+        case 'SQRT':  if (!vals.length || vals[0] < 0) return NaN;
+                      return Math.sqrt(vals[0]);
+        case 'EXP':   if (!vals.length) return NaN; return Math.exp(vals[0]);
+        case 'LN':    if (!vals.length || vals[0] <= 0) return NaN;
+                      return Math.log(vals[0]);
+        case 'COUNT': return vals.length;
+        case 'ROUND': if (vals.length < 2) return NaN;
+                      { const dec = Math.trunc(vals[1]);
+                        const fac = Math.pow(10, dec);
+                        return Math.round(vals[0] * fac) / fac; }
+        default:      return NaN;
+    }
+}
+
+function fxBuildGrid() {
+    const flat = [];
+    for (let r = 0; r < ROWS; r++) {
+        flat[r] = new Array(COLS).fill(null);
+        for (let c = 0; c < COLS; c++) {
+            const raw = getCellRaw(r, c);
+            if (!raw) continue;
+            const fc = raw[0];
+            if (fc === '=' || fc === '+' || fc === '@') continue;
+            const n = parseFloat(raw.replace(',', '.'));
+            if (!isNaN(n)) flat[r][c] = n;
+        }
+    }
+    const g = [];
+    for (let r = 0; r < ROWS; r++) {
+        g[r] = new Array(COLS).fill(null);
+        for (let c = 0; c < COLS; c++) {
+            const raw = getCellRaw(r, c);
+            if (!raw) { g[r][c] = flat[r][c]; continue; }
+            const fc = raw[0];
+            if (fc === '=' || fc === '+') {
+                const expr = fc === '=' ? raw.slice(1) : raw;
+                if (expr[0] === '@') {
+                    const v = fxEval(expr, flat, r, c);
+                    if (typeof v === 'number' && isFinite(v)) g[r][c] = v;
+                } else {
+                    const rep = expr.replace(/[A-Z]{1,2}\d+/g, ref => {
+                        const pos = parseRef(ref);
+                        if (!pos) return '0';
+                        const n = (flat[pos.r] || [])[pos.c];
+                        return (n !== null && n !== undefined) ? String(n) : '0';
+                    });
+                    try {
+                        if (/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(rep)) {
+                            const v = Function('"use strict"; return (' + rep + ')')();
+                            if (isFinite(v)) g[r][c] = v;
+                        }
+                    } catch(e) {}
+                }
+            } else if (fc === '@') {
+                const v = fxEval(raw, flat, r, c);
+                if (typeof v === 'number' && isFinite(v)) g[r][c] = v;
+            } else {
+                g[r][c] = flat[r][c];
+            }
+        }
+    }
+    return g;
+}
+
+function evalFormula(expr) {
+    expr = expr.trim();
+    if (expr[0] === '@') {
+        const res = fxEval(expr);
+        if (typeof res !== 'number' || !isFinite(res)) return '#ERR';
+        return res;
+    }
+    let work = expr;
+    let safety = 0;
+    while (work.includes('@') && safety++ < 20) {
+        const at = work.indexOf('@');
+        let depth = 0, end = at;
+        for (let i = at; i < work.length; i++) {
+            if (work[i] === '(') depth++;
+            else if (work[i] === ')') { depth--; if (depth === 0) { end = i; break; } }
+        }
+        const token = work.substring(at, end + 1);
+        const res = fxEval(token);
+        const val = (typeof res === 'number' && isFinite(res)) ? res : 0;
+        work = work.substring(0, at) + val + work.substring(end + 1);
+    }
+    const replaced = work.replace(/[A-Z]{1,2}\d+/g, ref => {
+        const pos = parseRef(ref);
+        if (!pos) return '0';
+        const val = getCellValue(pos.r, pos.c);
+        return (isNaN(val) || !isFinite(val)) ? '0' : val;
+    });
+    try {
+        if (!/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(replaced)) return '#ERR';
+        const result = Function('"use strict"; return (' + replaced + ')')();
+        return isFinite(result) ? result : '#DIV/0';
+    } catch {
+        return '#ERR';
+    }
+}
+
+function getCellRaw(r, c) { return cells[cellId(r, c)]?.raw ?? ''; }
+function getCellType(r, c) { return cells[cellId(r, c)]?.type ?? null; }
+
+function getCellValue(r, c) {
+    const raw = getCellRaw(r, c);
+    if (!raw) return 0;
+    if (raw[0] === '@') {
+        const res = fxEval(raw);
+        return (typeof res === 'number' && isFinite(res)) ? res : 0;
+    }
+    if (raw[0] === '=' || raw[0] === '+') {
+        const expr = raw.slice(1);
+        const v = evalFormula(expr);
+        const n = Number(v);
+        return (isNaN(n) || !isFinite(n)) ? 0 : n;
+    }
+    const n = parseFloat(raw.replace(',', '.'));
+    return isNaN(n) ? 0 : n;
+}
+
+function getCellDisplay(r, c) {
+    const raw = getCellRaw(r, c);
+    if (!raw) return '';
+    if (raw[0] === '@') {
+        const res = fxEval(raw);
+        if (typeof res !== 'number' || !isFinite(res)) return '#ERR';
+        let s = res.toString();
+        if (s.includes('.')) s = parseFloat(res.toFixed(6)).toString();
+        return s;
+    }
+    if (raw[0] === '=' || raw[0] === '+') {
+        const expr = raw.slice(1);
+        const v = evalFormula(expr);
+        if (v === '#ERR' || v === '#DIV/0') return v;
+        const n = Number(v);
+        if (!isFinite(n)) return String(v);
+        let s = n.toString();
+        if (s.includes('.')) s = parseFloat(n.toFixed(6)).toString();
+        return s;
+    }
+    if (getCellType(r, c) === 'label') return raw;
+    if (!isNaN(raw)) return raw;
+    return raw;
+}
+
+function setCellData(r, c, raw) {
+    const id = cellId(r, c);
+    if (!raw) { delete cells[id]; return; }
+    let type;
+    if (raw[0] === '"') { type = 'label'; raw = raw.slice(1); }
+    else if (raw[0] === '=' || raw[0] === '+' || raw[0] === '@') { type = 'num'; }
+    else if (!isNaN(raw) && raw.trim() !== '') { type = 'num'; }
+    else { type = 'label'; }
+    cells[id] = { raw, type };
+}
+
+// ── Grid DOM ──
+function buildGrid() {
+    let html = '<tr><th class="corner">⊞</th>';
+    for (let c = 0; c < COLS; c++) html += `<th style="min-width:90px;width:90px">${colLabel(c)}</th>`;
+    html += '</tr>';
+    for (let r = 0; r < ROWS; r++) {
+        html += `<tr><th class="row-h" style="position:sticky;left:0;top:auto;z-index:5">${r+1}</th>`;
+        for (let c = 0; c < COLS; c++) html += `<td id="c${r}_${c}"></td>`;
+        html += '</tr>';
+    }
+    elBody.innerHTML = html;
+    elBody.addEventListener('click', e => {
+        const td = e.target.closest('td');
+        if (!td) return;
+        const m = td.id.match(/^c(\d+)_(\d+)$/);
+        if (!m) return;
+        moveTo(parseInt(m[1]), parseInt(m[2]));
+    });
+}
+
+function tdEl(r, c) { return document.getElementById(`c${r}_${c}`); }
+
+let prevActiveR = 0, prevActiveC = 0;
+
+function renderCell(r, c) {
+    const el = tdEl(r, c);
+    if (!el) return;
+    el.textContent = getCellDisplay(r, c);
+    el.className = getCellType(r, c) === 'label' ? 'label-cell' : 'num-cell';
+}
+
+function setActive(r, c) {
+    // Quitar highlight de headers previos
+    document.querySelectorAll('th.col-hl, th.row-hl').forEach(th => th.classList.remove('col-hl','row-hl'));
+    // Celda previa
+    const prev = tdEl(prevActiveR, prevActiveC);
+    if (prev) {
+        prev.classList.remove('active');
+        const t = getCellType(prevActiveR, prevActiveC);
+        prev.className = t === 'label' ? 'label-cell' : 'num-cell';
+    }
+    const next = tdEl(r, c);
+    if (next) next.classList.add('active');
+    prevActiveR = r; prevActiveC = c;
+    // Highlight col/row headers
+    const firstRow = elBody.querySelector('tr:first-child');
+    if (firstRow) {
+        const colTh = firstRow.querySelectorAll('th')[c + 1];
+        if (colTh) colTh.classList.add('col-hl');
+    }
+    const rows = elBody.querySelectorAll('tr');
+    if (rows[r + 1]) {
+        const rowTh = rows[r + 1].querySelector('th.row-h');
+        if (rowTh) rowTh.classList.add('row-hl');
+    }
+}
+
+// Scroll con sticky-aware
+const HEADER_TOP  = 20;
+const HEADER_LEFT = 42;
+
+function scrollToCursor() {
+    const td = tdEl(curRow, curCol);
+    if (!td) return;
+    const box  = td.getBoundingClientRect();
+    const cont = elScroll.getBoundingClientRect();
+    const visTop = cont.top + HEADER_TOP, visLeft = cont.left + HEADER_LEFT;
+    if (box.top < visTop) elScroll.scrollTop -= (visTop - box.top);
+    else if (box.bottom > cont.bottom) elScroll.scrollTop += (box.bottom - cont.bottom);
+    if (box.left < visLeft) elScroll.scrollLeft -= (visLeft - box.left);
+    else if (box.right > cont.right) elScroll.scrollLeft += (box.right - cont.right);
+}
+
+// ── UI updates ──
+function updateTopBar() {
+    const id  = cellId(curRow, curCol);
+    const raw = getCellRaw(curRow, curCol);
+    const type = getCellType(curRow, curCol);
+    elRef.textContent = id;
+    elEntry.value = raw;
+    // Panel
+    const siRef = document.getElementById('si-ref');
+    const siType = document.getElementById('si-type');
+    const siRaw  = document.getElementById('si-raw');
+    const siVal  = document.getElementById('si-val');
+    const siPos  = document.getElementById('si-pos');
+    if (siRef) siRef.textContent = id;
+    if (siType) siType.textContent = type === 'label' ? 'Etiqueta' : type === 'num' ? 'Número/Fórmula' : '—';
+    if (siRaw)  siRaw.textContent  = raw || '—';
+    if (siVal)  siVal.textContent  = getCellDisplay(curRow, curCol) || '—';
+    if (siPos)  siPos.textContent  = curRow + ',' + curCol;
+    // Status bar
+    const sbRef = document.getElementById('sb-ref');
+    const sbVal = document.getElementById('sb-val');
+    const sbCnt = document.getElementById('sb-cnt');
+    if (sbRef) sbRef.textContent = id;
+    if (sbVal) sbVal.textContent = getCellDisplay(curRow, curCol) || '—';
+    if (sbCnt) { const n = Object.keys(cells).length; sbCnt.textContent = n + ' celda' + (n!==1?'s':''); }
+    // Stats
+    const siUsed = document.getElementById('si-used');
+    const siFml  = document.getElementById('si-fml');
+    const siLbl  = document.getElementById('si-lbl');
+    if (siUsed || siFml || siLbl) {
+        let fmls=0, lbls=0;
+        for (const k in cells) {
+            if (!cells[k]) continue;
+            if (cells[k].type==='num') fmls++;
+            else if (cells[k].type==='label') lbls++;
+        }
+        if (siUsed) siUsed.textContent = Object.keys(cells).length;
+        if (siFml)  siFml.textContent  = fmls;
+        if (siLbl)  siLbl.textContent  = lbls;
+    }
+}
+
+function updateModeLabel() {
+    elMode.textContent = mode;
+    elMode.className = mode==='ENTRY' ? 'entry' : mode==='CMD' ? 'cmd' : '';
+    const siMode = document.getElementById('si-mode');
+    if (siMode) siMode.textContent = mode;
+}
+
+// ── Movimiento ──
+function moveTo(r, c) {
+    if (r < 0) r = 0; if (r >= ROWS) r = ROWS-1;
+    if (c < 0) c = 0; if (c >= COLS) c = COLS-1;
+    curRow = r; curCol = c;
+    setActive(r, c);
+    scrollToCursor();
+    updateTopBar();
+}
+
+// ── Entrada ──
+function startEntry(firstChar) {
+    mode = 'ENTRY';
+    editBuf = firstChar ?? getCellRaw(curRow, curCol) ?? '';
+    elEntry.value = editBuf;
+    elEntry.readOnly = false;
+    elEntry.focus();
+    setTimeout(() => { elEntry.selectionStart = elEntry.selectionEnd = elEntry.value.length; }, 0);
+    updateModeLabel();
+}
+
+function renderFormulas() {
+    for (const id in cells) {
+        const raw = cells[id].raw;
+        if (!raw) continue;
+        const fc = raw[0];
+        if (fc === '@' || fc === '=' || fc === '+') {
+            const pos = parseRef(id);
+            if (pos) renderCell(pos.r, pos.c);
+        }
+    }
+}
+
+function confirmEntry(moveRow=1, moveCol=0) {
+    const raw = elEntry.value.trim();
+    setCellData(curRow, curCol, raw);
+    renderCell(curRow, curCol);
+    setActive(curRow, curCol);
+    renderFormulas();
+    elEntry.readOnly = true;
+    mode = 'READY';
+    updateModeLabel();
+    moveTo(curRow + moveRow, curCol + moveCol);
+    updateTopBar();
+}
+
+function cancelEntry() {
+    elEntry.value = getCellRaw(curRow, curCol);
+    elEntry.readOnly = true;
+    mode = 'READY';
+    updateModeLabel();
+    updateTopBar();
+}
+
+function deleteCell() {
+    const id = cellId(curRow, curCol);
+    delete cells[id];
+    renderCell(curRow, curCol);
+    setActive(curRow, curCol);
+    renderFormulas();
+    updateTopBar();
+}
+
+function recalcAll() {
+    renderFormulas();
+    updateTopBar();
+    toast('Recalculado','ok');
+}
+
+// ── Navegación Lotus ──
+const pgHeld = new Set();
+function pageSize() {
+    const rowH = tdEl(0,0)?.getBoundingClientRect().height || 20;
+    return Math.max(1, Math.floor(elScroll.clientHeight / rowH) - 1);
+}
+document.addEventListener('keyup', e => { pgHeld.delete(e.key); });
+
+let endMode = false, endTimeout = null;
+function activateEndMode() {
+    endMode = true;
+    elMode.textContent = 'FIN'; elMode.className = 'cmd';
+    clearTimeout(endTimeout);
+    endTimeout = setTimeout(cancelEndMode, 2000);
+}
+function cancelEndMode() {
+    endMode = false; clearTimeout(endTimeout); updateModeLabel();
+}
+
+function lotusJump(dr, dc) {
+    cancelEndMode();
+    let r = curRow, c = curCol;
+    const hasData = (row, col) =>
+        row>=0 && row<ROWS && col>=0 && col<COLS && !!getCellRaw(row, col);
+    if (hasData(r, c)) {
+        while (hasData(r+dr, c+dc) && r+dr>=0 && r+dr<ROWS && c+dc>=0 && c+dc<COLS) { r+=dr; c+=dc; }
+        moveTo(r, c);
+    } else {
+        r+=dr; c+=dc;
+        while (r>=0 && r<ROWS && c>=0 && c<COLS && !hasData(r,c)) { r+=dr; c+=dc; }
+        if (r>=0 && r<ROWS && c>=0 && c<COLS) moveTo(r, c);
+        else moveTo(dr>0?ROWS-1:dr<0?0:curRow, dc>0?COLS-1:dc<0?0:curCol);
+    }
+}
+
+function lastUsedCell() {
+    let maxR=0, maxC=0;
+    for (const id of Object.keys(cells)) {
+        const pos = parseRef(id); if (!pos) continue;
+        if (pos.r > maxR) maxR = pos.r;
+        if (pos.c > maxC) maxC = pos.c;
+    }
+    moveTo(maxR, maxC);
+}
+
+// ── Teclado READY ──
+document.addEventListener('keydown', e => {
+    if (mode === 'ENTRY') { handleKeyEntry(e); return; }
+    if (endMode) {
+        e.preventDefault();
+        switch (e.key) {
+            case 'ArrowDown':  lotusJump( 1, 0); break;
+            case 'ArrowUp':    lotusJump(-1, 0); break;
+            case 'ArrowRight': lotusJump( 0, 1); break;
+            case 'ArrowLeft':  lotusJump( 0,-1); break;
+            case 'Home':       cancelEndMode(); lastUsedCell(); break;
+            case 'End':        cancelEndMode(); break;
+            default:           cancelEndMode(); break;
+        }
+        return;
+    }
+    switch (e.key) {
+        case 'ArrowUp': case 'ArrowDown': case 'ArrowLeft': case 'ArrowRight': {
+            e.preventDefault();
+            const dr = e.key==='ArrowDown'?1 : e.key==='ArrowUp'?-1 : 0;
+            const dc = e.key==='ArrowRight'?1 : e.key==='ArrowLeft'?-1 : 0;
+            if (pgHeld.size > 0) moveTo(dr!==0?(dr>0?ROWS-1:0):curRow, dc!==0?(dc>0?COLS-1:0):curCol);
+            else if (e.ctrlKey) lotusJump(dr, dc);
+            else moveTo(curRow+dr, curCol+dc);
+            break;
+        }
+        case 'Tab': e.preventDefault(); moveTo(curRow, curCol+(e.shiftKey?-1:1)); break;
+        case 'Home': e.preventDefault(); moveTo(0, 0); break;
+        case 'End': e.preventDefault(); activateEndMode(); break;
+        case 'PageDown': e.preventDefault(); pgHeld.add('PageDown'); moveTo(curRow+pageSize(), curCol); break;
+        case 'PageUp':   e.preventDefault(); pgHeld.add('PageUp');   moveTo(curRow-pageSize(), curCol); break;
+        case 'Delete': case 'Backspace': e.preventDefault(); deleteCell(); break;
+        case 'Enter': case 'F2': e.preventDefault(); startEntry(); break;
+        case 'Escape': e.preventDefault(); break;
+        default:
+            if (e.key.length===1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                e.preventDefault(); startEntry(e.key);
+            }
+    }
+});
+
+function handleKeyEntry(e) {
+    switch (e.key) {
+        case 'Enter':  e.preventDefault(); editBuf=elEntry.value; confirmEntry(1,0); break;
+        case 'Tab':    e.preventDefault(); editBuf=elEntry.value; confirmEntry(0,1); break;
+        case 'Escape': e.preventDefault(); cancelEntry(); break;
+        default: setTimeout(() => { editBuf = elEntry.value; }, 0);
+    }
+}
+elEntry.addEventListener('input', () => { if (mode==='ENTRY') editBuf=elEntry.value; });
+
+// ══════════════════════════════════════════════════════════
+//  UI HELPERS
+// ══════════════════════════════════════════════════════════
+
+// Toast
+let _tT;
+function toast(msg, type='ok') {
+    document.getElementById('toast-msg').textContent = msg;
+    const dot = document.getElementById('toast-dot');
+    dot.className = 'toast-dot' + (type==='err'?' err':type==='warn'?' warn':'');
+    const el = document.getElementById('toast');
+    el.classList.add('on');
+    clearTimeout(_tT);
+    _tT = setTimeout(() => el.classList.remove('on'), 2600);
+}
+
+// Panel
+function closePanel() {
+    document.getElementById('rpanel').classList.add('closed');
+    document.getElementById('rb-panel').classList.remove('active-btn');
+    const rb2 = document.getElementById('rb-panel2');
+    if (rb2) rb2.classList.remove('active-btn');
+}
+function openPanel() {
+    document.getElementById('rpanel').classList.remove('closed');
+    document.getElementById('rb-panel').classList.add('active-btn');
+    const rb2 = document.getElementById('rb-panel2');
+    if (rb2) rb2.classList.add('active-btn');
+}
+function togglePanel() {
+    const rp = document.getElementById('rpanel');
+    rp.classList.contains('closed') ? openPanel() : closePanel();
+}
+
+// Tabs del panel
+function rpTab(idx, el) {
+    document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.rp-pane').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('rpp-' + idx).classList.add('active');
+}
+
+// Tabs del ribbon
+function switchTab(idx, el) {
+    document.querySelectorAll('.rtab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.rtab-panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('rt-' + idx).classList.add('active');
+}
+
+// Insertar función desde panel o ribbon
+function insertFn(fn) {
+    startEntry(fn);
+}
+
+// Exportar CSV demo
+function exportCSV() {
+    let csv = '';
+    let maxR = 0, maxC = 0;
+    for (const id of Object.keys(cells)) {
+        const pos = parseRef(id); if (!pos) continue;
+        if (pos.r > maxR) maxR = pos.r;
+        if (pos.c > maxC) maxC = pos.c;
+    }
+    for (let r = 0; r <= maxR; r++) {
+        const row = [];
+        for (let c = 0; c <= maxC; c++) row.push(getCellDisplay(r,c));
+        csv += row.join(',') + '\n';
+    }
+    if (!csv) { toast('Hoja vacía','warn'); return; }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+    a.download = 'findex_export.csv';
+    a.click();
+    toast('CSV exportado','ok');
+}
+
+// ── Init ──
+buildGrid();
+setActive(0, 0);
+moveTo(0, 0);
+updateModeLabel();
+updateTopBar();
+</script>
+</body>
+</html>
