@@ -24,6 +24,9 @@
   --green-dim:   rgba(29,185,84,0.10);
   --green-glow:  rgba(29,185,84,0.18);
   --green-line:  rgba(29,185,84,0.40);
+  --green-dim:   rgba(29,185,84,0.08);
+  --green-glow:  rgba(29,185,84,0.12);
+  --green-line:  rgba(29,185,84,0.28);
 
   --txt:         #E8E8E8;
   --txt2:        #A0A0A0;
@@ -65,6 +68,23 @@ body {
   line-height: 1.4;
 }
 
+body.light {
+  --bg: #F4F6F8;
+  --s0: #FFFFFF;
+  --s1: #F7F8FA;
+  --s2: #EEF1F4;
+  --s3: #E4E8ED;
+  --s4: #D9DFE6;
+  --border: rgba(15,23,42,0.12);
+  --border-med: rgba(15,23,42,0.20);
+  --txt: #111827;
+  --txt2: #4B5563;
+  --txt3: #6B7280;
+  --txt-inv: #FFFFFF;
+  --grid: rgba(15,23,42,0.08);
+  --grid-h: rgba(15,23,42,0.14);
+}
+
 /* ── Scrollbars ── */
 ::-webkit-scrollbar { width:5px; height:5px; }
 ::-webkit-scrollbar-track { background:transparent; }
@@ -90,88 +110,7 @@ body {
   flex-shrink: 0;
   user-select: none;
 }
-
-.tb-logo {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-right: 12px;
-  border-right: 1px solid var(--border);
-  height: 100%;
-}
-
-.tb-icon {
-  width: 22px; height: 22px;
-  background: var(--green);
-  border-radius: var(--r-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem; font-weight: 700; color: var(--txt-inv);
-}
-
-.tb-name {
-  font-size: 0.85rem; font-weight: 600;
-  color: var(--txt);
-  letter-spacing: -0.01em;
-}
-
-.tb-name em { color: var(--green); font-style: normal; }
-
-.tb-file {
-  display: flex; align-items: center; gap: 6px;
-  padding: 0 10px;
-  height: 100%;
-  border-right: 1px solid var(--border);
-}
-
-.tb-fname {
-  font-size: 0.78rem; color: var(--txt2);
-  display: flex; align-items: center; gap: 4px;
-  cursor: pointer;
-  padding: 2px 5px; border-radius: var(--r-sm);
-  transition: all var(--t);
-}
-.tb-fname:hover { background:var(--s3); color:var(--txt); }
-.tb-fname i { font-size:0.9rem; }
-
-.tb-saved {
-  font-size: 0.68rem; color: var(--green);
-  font-family: var(--font-mono);
-  background: var(--green-dim);
-  padding: 1px 6px; border-radius: 99px;
-  border: 1px solid var(--green-line);
-}
-
-.tb-actions {
-  display: flex; align-items: center; gap: 1px;
-}
-
-.tb-btn {
-  width:28px; height:28px;
-  background:transparent; border:none;
-  color: var(--txt3); border-radius:var(--r-sm);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1rem; cursor:pointer; transition:all var(--t);
-  position:relative;
-}
-.tb-btn:hover { background:var(--s3); color:var(--txt); }
-
-.tb-spacer { flex:1; }
-
-.tb-avatar {
-  width:26px; height:26px; border-radius:50%;
-  background: linear-gradient(135deg,#3B82F6,#8B5CF6);
-  display:flex; align-items:center; justify-content:center;
-  font-size:0.65rem; font-weight:700; color:#fff;
-}
-
-/* ══════════════════════════════════════════════════════
-   RIBBON TABS  (Office-style)
-   ══════════════════════════════════════════════════════ */
-#rib-tabs {
-  height: var(--tab-h);
-  background: var(--s1);
-  border-bottom: 1px solid var(--border);
-  display: flex;
+@@ -175,51 +192,51 @@ body {
   align-items: flex-end;
   padding: 0 10px;
   gap: 0;
@@ -198,6 +137,7 @@ body {
   color: var(--green);
   border-bottom-color: var(--green);
   background: rgba(29,185,84,0.04);
+  background: rgba(255,255,255,0.02);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -223,43 +163,7 @@ body {
 /* Grupo de botones */
 .rg {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-shrink: 0;
-  min-width: 60px;
-  position: relative;
-}
-
-/* Fila de botones dentro del grupo */
-.rg-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  flex: 1;
-  padding: 4px 4px 0;
-}
-
-/* Etiqueta de grupo — al fondo, estilo Office */
-.rg-label {
-  font-size: 0.6rem;
-  color: var(--txt3);
-  text-align: center;
-  padding: 2px 6px 3px;
-  border-top: 1px solid var(--border);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-/* Separador vertical entre grupos */
-.rg-sep {
-  width: 1px;
-  margin: 8px 2px;
-  background: var(--border);
-  flex-shrink: 0;
-  align-self: stretch;
-}
-
+@@ -263,101 +280,107 @@ body {
 /* ── Botón de ribbon (estilo Office: icono arriba, texto abajo) ── */
 .rb {
   display: flex;
@@ -286,12 +190,17 @@ body {
   text-align: center;
 }
 .rb i { font-size: 1.3rem; transition: color var(--t); }
+.mdi { vertical-align: middle; text-rendering: geometricPrecision; }
+.rb i { font-size: 1.25rem; transition: color var(--t), background var(--t); line-height:1; width:1.28em; text-align:center; padding:2px; border-radius:4px; background:rgba(255,255,255,0.03); }
+.tb-btn i { font-size:0.95rem; line-height:1; }
+.tb-btn i, .rp-head-title i, .rp-stitle i { line-height:1; }
 .rb:hover {
   background: var(--s3);
   border-color: var(--border-med);
   color: var(--txt);
 }
 .rb:hover i { color: var(--green); }
+.rb:hover i { color: var(--green); background: rgba(29,185,84,0.10); }
 .rb:active {
   background: var(--green-dim);
   border-color: rgba(29,185,84,0.25);
@@ -305,6 +214,8 @@ body {
 .rb.active-btn {
   background: var(--green-dim);
   border-color: rgba(29,185,84,0.30);
+  background: rgba(29,185,84,0.12);
+  border-color: rgba(29,185,84,0.24);
   color: var(--green);
 }
 .rb.active-btn i { color: var(--green); }
@@ -336,6 +247,10 @@ body {
   border-radius: var(--r-sm);
   border: 1px solid var(--border-med);
   white-space: nowrap;
+  white-space: pre-line;
+  width: max-content;
+  min-width: 200px;
+  max-width: 280px;
   pointer-events: none;
   z-index: 2000;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
@@ -361,110 +276,7 @@ body {
   font-size: 0.78rem; font-weight: 600;
   color: var(--green);
   background: var(--s2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 1px 6px;
-  min-width: 52px;
-  text-align: center;
-  cursor: pointer;
-  transition: all var(--t);
-}
-#fml-ref:hover { border-color: var(--green-line); background:var(--green-dim); }
-
-.fml-fx {
-  font-family: var(--font-mono);
-  font-size: 0.8rem; font-weight: 600;
-  color: var(--txt3);
-  padding-right: 8px;
-  border-right: 1px solid var(--border);
-}
-
-#entry-line {
-  flex: 1;
-  background: transparent;
-  border: none; outline: none;
-  color: var(--txt);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  caret-color: var(--green);
-}
-
-#fml-mode {
-  font-family: var(--font-mono);
-  font-size: 0.65rem; font-weight: 600;
-  padding: 1px 6px;
-  border-radius: 99px;
-  background: var(--s2);
-  color: var(--txt3);
-  border: 1px solid var(--border);
-  min-width: 50px;
-  text-align: center;
-  transition: all var(--t);
-}
-#fml-mode.entry { background:var(--green-dim); color:var(--green); border-color:var(--green-line); }
-#fml-mode.cmd { background:rgba(245,158,11,0.12); color:#F59E0B; border-color:rgba(245,158,11,0.35); }
-
-/* ══════════════════════════════════════════════════════
-   APP BODY
-   ══════════════════════════════════════════════════════ */
-#app-body {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  min-height: 0;
-}
-
-/* ══════════════════════════════════════════════════════
-   SHEET AREA
-   ══════════════════════════════════════════════════════ */
-#sheet-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: 0;
-  background: var(--bg);
-}
-
-#sheet-scroll {
-  flex: 1;
-  overflow: auto;
-  position: relative;
-}
-
-/* Tabla */
-table {
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-th {
-  background: var(--s1);
-  color: var(--txt3);
-  font-family: var(--font-mono);
-  font-size: 0.65rem; font-weight: 500;
-  border-right: 1px solid var(--grid);
-  border-bottom: 1px solid var(--grid-h);
-  text-align: center;
-  position: sticky; top: 0; z-index: 10;
-  user-select: none;
-  height: 20px;
-  padding: 0 2px;
-  transition: background var(--t);
-}
-
-th.row-h {
-  position: sticky; left: 0; top: auto; z-index: 5;
-  width: 42px; min-width: 42px;
-  border-right: 1px solid var(--grid-h);
-  font-weight: 400;
-}
-
-th.corner {
-  position: sticky; top: 0; left: 0; z-index: 20;
-  width: 42px; min-width: 42px;
-  background: var(--s1);
-  cursor: pointer;
+@@ -468,173 +491,184 @@ th.corner {
 }
 th.corner:hover { background:var(--green-dim); color:var(--green); }
 
@@ -490,6 +302,7 @@ td {
 }
 
 td:hover:not(.active) { background: var(--s2); }
+td.sel { background: rgba(29,185,84,0.10) !important; }
 td.label-cell { text-align: left; color: var(--txt2); }
 td.num-cell { text-align: right; }
 
@@ -497,6 +310,7 @@ td.num-cell { text-align: right; }
 td.active {
   background: var(--green-dim) !important;
   outline: 1.5px solid var(--green);
+  outline: 1px solid var(--green);
   outline-offset: -1px;
   color: var(--txt) !important;
   font-weight: 600;
@@ -527,6 +341,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
 }
 #rpanel.closed { width:0; min-width:0; border-left:none; overflow:hidden; }
 
+
 .rp-head {
   padding: 8px 10px;
   border-bottom: 1px solid var(--border);
@@ -549,6 +364,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   font-size:0.85rem; cursor:pointer; transition:all var(--t);
 }
 .rp-close:hover { background:rgba(239,68,68,0.12); color:#EF4444; }
+.rp-close[disabled] { opacity:0.35; cursor:not-allowed; }
 
 /* Tabs del panel */
 .rp-tabs {
@@ -569,6 +385,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   user-select:none;
 }
 .rp-tab.active { color:var(--green); border-bottom-color:var(--green); background:var(--green-dim); }
+.rp-tab.active { color:var(--green); border-bottom-color:var(--green); background:rgba(255,255,255,0.02); }
 .rp-tab:hover:not(.active) { color:var(--txt2); background:var(--s2); }
 
 .rp-body { flex:1; overflow-y:auto; }
@@ -613,6 +430,16 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
 }
 .fn-card:hover { background:var(--s3); border-left-color:var(--green); transform:translateX(2px); }
 .fn-card:last-child { margin-bottom:0; }
+.rp-context {
+  margin-top: 6px;
+  font-size: 0.62rem;
+  color: var(--txt2);
+  line-height: 1.45;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--s2);
+}
 
 .fn-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
 .fn-name {
@@ -638,61 +465,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   font-size: 0.62rem; color:var(--txt3);
   font-family: var(--font-mono);
 }
-
-.sb-tabs { display:flex; gap:1px; flex:1; }
-.sb-tab {
-  padding:2px 8px; font-size:0.62rem; color:var(--txt3);
-  cursor:pointer; border-radius:var(--r-sm);
-  transition:all var(--t); user-select:none;
-  display:flex; align-items:center; gap:3px;
-}
-.sb-tab.active { background:var(--green-dim); color:var(--green); font-weight:600; }
-.sb-tab:hover:not(.active) { background:var(--s3); color:var(--txt2); }
-
-.sb-add {
-  width:18px; height:18px; background:transparent; border:none;
-  color:var(--txt3); font-size:0.9rem;
-  display:flex; align-items:center; justify-content:center;
-  border-radius:var(--r-sm); cursor:pointer; transition:all var(--t);
-}
-.sb-add:hover { background:var(--green-dim); color:var(--green); }
-
-.sb-right { display:flex; align-items:center; gap:8px; }
-.sb-chip {
-  padding:1px 6px;
-  background:var(--s2); border:1px solid var(--border);
-  border-radius:99px; font-size:0.6rem; color:var(--txt2);
-}
-.sb-chip.g { color:var(--green); background:var(--green-dim); border-color:var(--green-dim); }
-
-/* ══════════════════════════════════════════════════════
-   TOAST
-   ══════════════════════════════════════════════════════ */
-#toast {
-  position:fixed; bottom:36px; left:50%;
-  transform:translateX(-50%) translateY(10px);
-  background:var(--s3);
-  border:1px solid var(--border-med);
-  border-radius:99px; padding:5px 14px;
-  font-size:0.72rem; color:var(--txt);
-  box-shadow:0 8px 24px rgba(0,0,0,0.4);
-  opacity:0; pointer-events:none;
-  transition:opacity 0.18s, transform 0.18s;
-  display:flex; align-items:center; gap:6px;
-  z-index:9000;
-}
-#toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
-.toast-dot { width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
-.toast-dot.err { background:#EF4444; }
-.toast-dot.warn { background:#F59E0B; }
-
-/* ══════════════════════════════════════════════════════
-   CONTENIDO PANEL — Tab 0, 1 (ocultar/mostrar)
-   ══════════════════════════════════════════════════════ */
-.rp-pane { display:none; }
-.rp-pane.active { display:block; }
-
-@keyframes fadeUp {
+@@ -696,50 +730,51 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   from { opacity:0; transform:translateY(4px); }
   to   { opacity:1; transform:translateY(0); }
 }
@@ -718,6 +491,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
     <button class="tb-btn" data-tip="Guardar (Ctrl+S)" onclick="toast('Guardado','ok')"><i class="mdi mdi-content-save-outline"></i></button>
     <button class="tb-btn" data-tip="Exportar CSV" onclick="exportCSV()"><i class="mdi mdi-download-outline"></i></button>
   </div>
+  <button class="tb-btn" id="theme-toggle" data-tip="Cambiar tema: Oscuro / Claro" onclick="toggleTheme()"><i class="mdi mdi-weather-night"></i></button>
   <div class="tb-spacer"></div>
   <div class="tb-avatar">JD</div>
 </div>
@@ -743,7 +517,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
         <button class="rb" data-tip="Abrir archivo existente&#10;Carga un .fx o .csv"><i class="mdi mdi-folder-open-outline"></i>Abrir</button>
         <button class="rb" data-tip="Guardar (Ctrl+S)&#10;Guarda el modelo actual" onclick="toast('Guardado','ok')"><i class="mdi mdi-content-save-outline"></i>Guardar</button>
       </div>
-      <div class="rg-label">Archivo</div>
+@@ -747,310 +782,269 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
     </div>
     <div class="rg-sep"></div>
     <!-- Edición -->
@@ -770,6 +544,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
     <div class="rg">
       <div class="rg-row">
         <button class="rb active-btn" id="rb-panel" data-tip="Mostrar / ocultar panel lateral&#10;Muestra información de celda y funciones" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel</button>
+        <button class="rb active-btn" id="rb-panel" data-tip="Panel IA siempre visible&#10;Contexto activo + sugerencias&#10;Uso: seleccionar celda" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel IA</button>
         <button class="rb" data-tip="Recalcular todas las fórmulas (F9)&#10;Fuerza re-evaluación de la hoja" onclick="recalcAll()"><i class="mdi mdi-refresh"></i>Recalc</button>
       </div>
       <div class="rg-label">Vista</div>
@@ -791,6 +566,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   <!-- TAB 2 · FÓRMULAS -->
   <div class="rtab-panel" id="rt-2">
     <!-- Estadística -->
+    <!-- Operaciones básicas -->
     <div class="rg">
       <div class="rg-row">
         <button class="rb" data-tip="@SUM(rango)&#10;Suma de un rango o lista&#10;Ej: @SUM(A1:A12)&#10;También: @SUM(1000;A1:A5;2000)" onclick="insertFn('@SUM(')"><i class="mdi mdi-sigma"></i>@SUM</button>
@@ -798,11 +574,29 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
         <button class="rb" data-tip="@MIN(rango)&#10;Valor mínimo del rango&#10;Ej: @MIN(A1:A5)&#10;Mes con menor rendimiento" onclick="insertFn('@MIN(')"><i class="mdi mdi-chevron-triple-down"></i>@MIN</button>
         <button class="rb" data-tip="@MAX(rango)&#10;Valor máximo del rango&#10;Ej: @MAX(A1:A5)&#10;Pico de venta o costo" onclick="insertFn('@MAX(')"><i class="mdi mdi-chevron-triple-up"></i>@MAX</button>
         <button class="rb" data-tip="@COUNT(rango)&#10;Cuenta celdas con datos&#10;Ej: @COUNT(A1:A100)&#10;Meses activos, clientes, ítems" onclick="insertFn('@COUNT(')"><i class="mdi mdi-counter"></i>@COUNT</button>
+        <button class="rb" data-tip="@SUM(rango)
+Descripción: Suma valores de un rango o lista
+Ejemplo: @SUM(A1:A12)
+Sintaxis: @SUM(valor1;valor2;...)" onclick="insertFn('@SUM(')"><i class="mdi mdi-sigma"></i>Suma</button>
+        <button class="rb" data-tip="@SUB(a;b)
+Descripción: Resta b a a
+Ejemplo: @SUB(B4;C4)
+Sintaxis: @SUB(valorA;valorB)" onclick="insertFn('@SUB(')"><i class="mdi mdi-minus-circle-outline"></i>Resta</button>
+        <button class="rb" data-tip="@MUL(a;b)
+Descripción: Multiplica dos o más valores
+Ejemplo: @MUL(B4;1.19)
+Sintaxis: @MUL(valor1;valor2;...)" onclick="insertFn('@MUL(')"><i class="mdi mdi-close-circle-outline"></i>Multip.</button>
+        <button class="rb" data-tip="@DIV(a;b)
+Descripción: Divide a por b
+Ejemplo: @DIV(B4;12)
+Sintaxis: @DIV(dividendo;divisor)" onclick="insertFn('@DIV(')"><i class="mdi mdi-division-box"></i>División</button>
       </div>
       <div class="rg-label">Estadística</div>
+      <div class="rg-label">OPERACIONES BÁSICAS</div>
     </div>
     <div class="rg-sep"></div>
     <!-- Matemáticas -->
+    <!-- Funciones financieras -->
     <div class="rg">
       <div class="rg-row">
         <button class="rb" data-tip="@ROUND(valor;decimales)&#10;Redondea al nº de decimales&#10;Ej: @ROUND(A1*1,19;0)&#10;Montos finales en CLP enteros" onclick="insertFn('@ROUND(')"><i class="mdi mdi-decimal"></i>@ROUND</button>
@@ -810,15 +604,49 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
         <button class="rb" data-tip="@ABS(valor)&#10;Valor absoluto (sin signo)&#10;Ej: @ABS(E3-E4)&#10;Desviaciones real vs presupuestado" onclick="insertFn('@ABS(')"><i class="mdi mdi-plus-minus-variant"></i>@ABS</button>
         <button class="rb" data-tip="@SQRT(valor)&#10;Raíz cuadrada&#10;Ej: @SQRT(C5)&#10;Desviación estándar manual" onclick="insertFn('@SQRT(')"><i class="mdi mdi-square-root"></i>@SQRT</button>
         <button class="rb" data-tip="@RAND&#10;Número aleatorio entre 0 y 1&#10;Ej: @ROUND(@RAND*1000;0)&#10;Simulación de escenarios" onclick="insertFn('@RAND')"><i class="mdi mdi-dice-multiple-outline"></i>@RAND</button>
+        <button class="rb" data-tip="@NPV(tasa;flujo1;flujo2;...)
+Descripción: Valor actual neto
+Ejemplo: @NPV(0.12;B2:B7)
+Sintaxis: @NPV(rate;cashflows...)" onclick="insertFn('@NPV(')"><i class="mdi mdi-cash-multiple"></i>VAN</button>
+        <button class="rb" data-tip="@IRR(flujo1;flujo2;...)
+Descripción: Tasa interna de retorno
+Ejemplo: @IRR(B2:B7)
+Sintaxis: @IRR(cashflows...)" onclick="insertFn('@IRR(')"><i class="mdi mdi-finance"></i>TIR</button>
+        <button class="rb" data-tip="@FLOW(inicio;tasa;periodos)
+Descripción: Flujo compuesto por periodos
+Ejemplo: @FLOW(100000;0.01;12)
+Sintaxis: @FLOW(base;rate;n)" onclick="insertFn('@FLOW(')"><i class="mdi mdi-chart-timeline-variant"></i>Flujo</button>
+        <button class="rb" data-tip="@COMPOUND(principal;tasa;periodos)
+Descripción: Interés compuesto
+Ejemplo: @COMPOUND(100000;0.08;5)
+Sintaxis: @COMPOUND(P;r;n)" onclick="insertFn('@COMPOUND(')"><i class="mdi mdi-percent-circle-outline"></i>Compuesto</button>
       </div>
       <div class="rg-label">Matemáticas</div>
+      <div class="rg-label">FUNCIONES FINANCIERAS</div>
     </div>
     <div class="rg-sep"></div>
     <!-- Avanzadas -->
+    <!-- Análisis -->
     <div class="rg">
       <div class="rg-row">
         <button class="rb" data-tip="@EXP(valor)&#10;Número e elevado al valor&#10;Ej: @EXP(tasa/12)&#10;Proyecciones de crecimiento compuesto" onclick="insertFn('@EXP(')"><i class="mdi mdi-trending-up"></i>@EXP</button>
         <button class="rb" data-tip="@LN(valor)&#10;Logaritmo natural&#10;Ej: @LN(D3)&#10;Tendencias y elasticidad" onclick="insertFn('@LN(')"><i class="mdi mdi-math-log"></i>@LN</button>
+        <button class="rb" data-tip="@AVG(rango)
+Descripción: Promedio aritmético
+Ejemplo: @AVG(B2:B13)
+Sintaxis: @AVG(valor1;valor2;...)" onclick="insertFn('@AVG(')"><i class="mdi mdi-chart-bell-curve"></i>Promedio</button>
+        <button class="rb" data-tip="@TREND(y1;y2;...;x)
+Descripción: Tendencia lineal estimada
+Ejemplo: @TREND(B2:B7;8)
+Sintaxis: @TREND(serie;xObjetivo)" onclick="insertFn('@TREND(')"><i class="mdi mdi-trending-up"></i>Tendencia</button>
+        <button class="rb" data-tip="@PROJ(base;tasa;periodos)
+Descripción: Proyección de crecimiento
+Ejemplo: @PROJ(B4;0.05;3)
+Sintaxis: @PROJ(valor;rate;n)" onclick="insertFn('@PROJ(')"><i class="mdi mdi-chart-line"></i>Proyección</button>
+        <button class="rb" data-tip="@SENS(base;cambio)
+Descripción: Sensibilidad con variación porcentual
+Ejemplo: @SENS(B4;0.1)
+Sintaxis: @SENS(valor;delta)" onclick="insertFn('@SENS(')"><i class="mdi mdi-tune-variant"></i>Sensibilidad</button>
       </div>
       <div class="rg-label">Avanzadas</div>
     </div>
@@ -834,6 +662,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
         <button class="rb sm" data-tip="Rango: A1:A10&#10;Lista: A1;B2;C3&#10;Relativo: +1:+5">rango</button>
       </div>
       <div class="rg-label">Sintaxis</div>
+      <div class="rg-label">ANÁLISIS</div>
     </div>
   </div>
 
@@ -861,6 +690,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
     <div class="rg">
       <div class="rg-row">
         <button class="rb active-btn" id="rb-panel2" data-tip="Mostrar / ocultar panel lateral" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel</button>
+        <button class="rb active-btn" id="rb-panel2" data-tip="Panel IA siempre visible&#10;No se puede ocultar" onclick="togglePanel()"><i class="mdi mdi-dock-right"></i>Panel IA</button>
         <button class="rb" data-tip="Ir a A1 (Home)&#10;Regresa al origen de la hoja" onclick="moveTo(0,0)"><i class="mdi mdi-home-outline"></i>A1</button>
       </div>
       <div class="rg-label">Panel</div>
@@ -872,6 +702,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
       </div>
       <div class="rg-row" style="padding-top:0">
         <button class="rb sm" data-tip="Motor Findex v2.1&#10;12 funciones integradas">v2.1</button>
+        <button class="rb sm" data-tip="Motor Findex v2.1&#10;26 funciones integradas">v2.1</button>
       </div>
       <div class="rg-label">Info</div>
     </div>
@@ -903,6 +734,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
     <div class="rp-head">
       <div class="rp-head-title"><i class="mdi mdi-view-dashboard-outline"></i> Asistente</div>
       <button class="rp-close" onclick="closePanel()"><i class="mdi mdi-close"></i></button>
+      <button class="rp-close" onclick="togglePanel()" disabled data-tip="El asistente IA permanece fijo"><i class="mdi mdi-lock-outline"></i></button>
     </div>
     <div class="rp-tabs">
       <button class="rp-tab active" onclick="rpTab(0,this)">Celda</button>
@@ -937,6 +769,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
             <span class="ci-key">Estado</span><span class="ci-val accent" id="si-mode">LISTO</span>
             <span class="ci-key">Posición</span><span class="ci-val" id="si-pos">0,0</span>
           </div>
+          <div class="rp-context" id="ai-context">Asistente IA activo: selecciona una celda para ver contexto, sintaxis sugerida y funciones recomendadas sin salir de la planilla.</div>
         </div>
       </div>
 
@@ -969,6 +802,11 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
             <div class="fn-desc">Cuenta celdas con datos</div>
             <div class="fn-ex">Meses activos, clientes, ítems vendidos</div>
           </div>
+          <div class="rp-stitle"><i class="mdi mdi-calculator-variant"></i>Operaciones básicas</div>
+          <div class="fn-card" onclick="insertFn('@SUM(')"><div class="fn-top"><span class="fn-name">@SUM</span><span class="fn-syn">@SUM(A1:A12)</span></div><div class="fn-desc">Suma rango, lista o valores mixtos</div><div class="fn-ex">Ej: @SUM(1000;A1:A5)</div></div>
+          <div class="fn-card" onclick="insertFn('@SUB(')"><div class="fn-top"><span class="fn-name">@SUB</span><span class="fn-syn">@SUB(B5;C5)</span></div><div class="fn-desc">Resta dos valores</div><div class="fn-ex">Sintaxis: @SUB(a;b)</div></div>
+          <div class="fn-card" onclick="insertFn('@MUL(')"><div class="fn-top"><span class="fn-name">@MUL</span><span class="fn-syn">@MUL(B5;1.19)</span></div><div class="fn-desc">Multiplica múltiples argumentos</div><div class="fn-ex">Sintaxis: @MUL(v1;v2;...)</div></div>
+          <div class="fn-card" onclick="insertFn('@DIV(')"><div class="fn-top"><span class="fn-name">@DIV</span><span class="fn-syn">@DIV(B5;12)</span></div><div class="fn-desc">Divide el primer valor por el segundo</div><div class="fn-ex">Sintaxis: @DIV(a;b)</div></div>
         </div>
         <div class="rp-section">
           <div class="rp-stitle"><i class="mdi mdi-calculator-variant-outline"></i>Matemáticas</div>
@@ -997,6 +835,12 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
             <div class="fn-desc">Número aleatorio entre 0 y 1</div>
             <div class="fn-ex">Simulaciones de riesgo o escenarios</div>
           </div>
+          <div class="rp-stitle"><i class="mdi mdi-bank-outline"></i>Funciones financieras</div>
+          <div class="fn-card" onclick="insertFn('@NPV(')"><div class="fn-top"><span class="fn-name">@NPV</span><span class="fn-syn">@NPV(0.12;B2:B7)</span></div><div class="fn-desc">Valor actual neto (VAN)</div><div class="fn-ex">Descuenta una serie de flujos</div></div>
+          <div class="fn-card" onclick="insertFn('@IRR(')"><div class="fn-top"><span class="fn-name">@IRR</span><span class="fn-syn">@IRR(B2:B7)</span></div><div class="fn-desc">Tasa interna de retorno (TIR)</div><div class="fn-ex">Devuelve la tasa implícita</div></div>
+          <div class="fn-card" onclick="insertFn('@FLOW(')"><div class="fn-top"><span class="fn-name">@FLOW</span><span class="fn-syn">@FLOW(100000;0.01;12)</span></div><div class="fn-desc">Flujo acumulado por periodos</div><div class="fn-ex">Base * (1+tasa)^n</div></div>
+          <div class="fn-card" onclick="insertFn('@COMPOUND(')"><div class="fn-top"><span class="fn-name">@COMPOUND</span><span class="fn-syn">@COMPOUND(100000;0.08;5)</span></div><div class="fn-desc">Interés compuesto</div><div class="fn-ex">Capitalización periódica</div></div>
+          <div class="fn-card" onclick="insertFn('@PMT(')"><div class="fn-top"><span class="fn-name">@PMT</span><span class="fn-syn">@PMT(0.01;36;1000000)</span></div><div class="fn-desc">Cuota periódica de préstamo</div><div class="fn-ex">Sintaxis: @PMT(tasa;nper;pv)</div></div>
         </div>
         <div class="rp-section">
           <div class="rp-stitle"><i class="mdi mdi-chart-bell-curve"></i>Avanzadas</div>
@@ -1029,6 +873,12 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
             <div class="fn-top"><span class="fn-name" style="background:rgba(245,158,11,0.12);color:#F59E0B;border-color:rgba(245,158,11,0.2)">Anidado</span></div>
             <div class="fn-desc">@SUM(A1:A5;@ROUND(B1;0))</div>
           </div>
+          <div class="rp-stitle"><i class="mdi mdi-chart-areaspline"></i>Análisis</div>
+          <div class="fn-card" onclick="insertFn('@AVG(')"><div class="fn-top"><span class="fn-name">@AVG</span><span class="fn-syn">@AVG(B2:B13)</span></div><div class="fn-desc">Promedio aritmético</div><div class="fn-ex">Media de la serie</div></div>
+          <div class="fn-card" onclick="insertFn('@TREND(')"><div class="fn-top"><span class="fn-name">@TREND</span><span class="fn-syn">@TREND(B2:B7;8)</span></div><div class="fn-desc">Estimación lineal de tendencia</div><div class="fn-ex">Proyecta siguiente valor</div></div>
+          <div class="fn-card" onclick="insertFn('@PROJ(')"><div class="fn-top"><span class="fn-name">@PROJ</span><span class="fn-syn">@PROJ(B4;0.05;3)</span></div><div class="fn-desc">Proyección compuesta de crecimiento</div><div class="fn-ex">Valor*(1+tasa)^n</div></div>
+          <div class="fn-card" onclick="insertFn('@SENS(')"><div class="fn-top"><span class="fn-name">@SENS</span><span class="fn-syn">@SENS(B4;0.1)</span></div><div class="fn-desc">Análisis de sensibilidad simple</div><div class="fn-ex">Valor*(1+delta)</div></div>
+          <div class="fn-card" onclick="insertFn('@CAGR(')"><div class="fn-top"><span class="fn-name">@CAGR</span><span class="fn-syn">@CAGR(100;160;4)</span></div><div class="fn-desc">Crecimiento anual compuesto</div><div class="fn-ex">Sintaxis: @CAGR(inicio;fin;años)</div></div>
         </div>
       </div>
 
@@ -1054,8 +904,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
             <span class="ci-key">Escape</span><span class="ci-val">Cancelar</span>
             <span class="ci-key">Delete</span><span class="ci-val">Borrar celda</span>
             <span class="ci-key">Cualquier tecla</span><span class="ci-val">Sobreescribir</span>
-          </div>
-        </div>
+@@ -1059,477 +1053,650 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
         <div class="rp-section">
           <div class="rp-stitle"><i class="mdi mdi-function-variant"></i>Prefijos de fórmula</div>
           <div class="ci-grid">
@@ -1081,6 +930,7 @@ tr:nth-child(even) td:hover:not(.active) { background: var(--s2); }
   <div class="sb-right">
     <span id="sb-cnt">0 celdas</span>
     <span class="sb-chip g" id="sb-ref">A1</span>
+    <span class="sb-chip" id="sb-range">A1</span>
     <span class="sb-chip" id="sb-val">—</span>
     <span class="sb-chip">254×63</span>
     <span class="sb-chip g">Motor v2.1</span>
@@ -1126,6 +976,8 @@ function cellId(r, c) { return colLabel(c) + (r + 1); }
 
 function parseRef(ref) {
     const m = ref.match(/^([A-Z]{1,2})(\d+)$/);
+    ref = (ref || '').trim().toUpperCase();
+    const m = ref.match(/^\$?([A-Z]{1,2})\$?(\d+)$/);
     if (!m) return null;
     const colStr = m[1];
     const rowNum = parseInt(m[2]) - 1;
@@ -1147,6 +999,7 @@ function fxColIdx(s) {
 
 function fxParseRef(ref, fr, fc) {
     ref = ref.trim();
+    ref = (ref || '').trim().toUpperCase();
     if (!ref) return null;
     if (/^[+\-]\d+$/.test(ref)) return { fila: fr + parseInt(ref), columna: fc };
     const m = ref.match(/^\$?([A-Z]+)\$?(\d+)$/);
@@ -1163,6 +1016,9 @@ function fxGetVal(g, fila, col) {
 function fxRango(spec, g, fr, fc) {
     const pos = [];
     spec = spec.trim();
+    // Aceptar mayúsculas/minúsculas y espacios opcionales en referencias/rangos
+    spec = spec.replace(/\s+/g, '');
+    spec = spec.replace(/[a-z]/g, ch => ch.toUpperCase());
     if (!spec) return pos;
     const rel = spec.match(/^([+\-]\d+):([+\-]\d+)$/);
     if (rel) {
@@ -1171,6 +1027,7 @@ function fxRango(spec, g, fr, fc) {
         return pos;
     }
     const ab = spec.match(/^(\$?[A-Z]+\$?\d+):$/);
+    const ab = spec.match(/^(\$?[A-Z]+\$?\d+):$/i);
     if (ab) {
         const ini = fxParseRef(ab[1], fr, fc);
         if (!ini) return pos;
@@ -1222,6 +1079,8 @@ function fxArgs(argsStr, g, fr, fc) {
     }
     segs.push(argsStr.substring(ini).trim());
     for (const seg of segs) {
+    for (const segRaw of segs) {
+        const seg = normalizeFormulaInput(segRaw.trim());
         if (!seg) continue;
         if (seg[0] === '@') {
             const v = fxEval(seg, g, fr, fc);
@@ -1238,6 +1097,8 @@ function fxArgs(argsStr, g, fr, fc) {
         if (/[\+\-\*\/]/.test(seg)) {
             const expr = seg.replace(/\$?[A-Z]{1,2}\$?\d+/g, ref => {
                 const p = fxParseRef(ref, fr, fc);
+            const expr = seg.replace(/\$?[A-Z]{1,2}\$?\d+/gi, ref => {
+                const p = fxParseRef(ref.toUpperCase(), fr, fc);
                 if (!p) return '0';
                 const v = fxGetVal(g, p.fila, p.columna);
                 return v !== null ? String(v) : '0';
@@ -1260,6 +1121,8 @@ function fxArgs(argsStr, g, fr, fc) {
 
 function fxEval(formula, g, fr, fc) {
     formula = (formula || '').trim();
+    formula = normalizeFormulaInput((formula || '').trim());
+    if (/^@[A-Z]+$/i.test(formula)) formula += '()';
     if (!formula || formula[0] !== '@') {
         if (!g) { g = fxBuildGrid(); fr = curRow; fc = curCol; }
         const ref = fxParseRef(formula, fr, fc);
@@ -1296,6 +1159,7 @@ function fxEval(formula, g, fr, fc) {
         return resultado;
     }
     const m = formula.match(/^@([A-Z]+)\(([\s\S]*)\)$/);
+    const m = formula.match(/^@([A-Z]+)\(([\s\S]*)\)$/i);
     if (!m) return NaN;
     const fn   = m[1].toUpperCase();
     const args = m[2];
@@ -1319,6 +1183,44 @@ function fxEval(formula, g, fr, fc) {
                       { const dec = Math.trunc(vals[1]);
                         const fac = Math.pow(10, dec);
                         return Math.round(vals[0] * fac) / fac; }
+        case 'SUB':   if (vals.length < 2) return NaN; return vals[0] - vals[1];
+        case 'MUL':   if (!vals.length) return NaN; return vals.reduce((a,v)=>a*v,1);
+        case 'DIV':   if (vals.length < 2 || vals[1] === 0) return NaN; return vals[0] / vals[1];
+        case 'NPV':   if (vals.length < 2) return NaN;
+                      { const rate = vals[0];
+                        return vals.slice(1).reduce((acc,cf,i)=>acc + (cf / Math.pow(1+rate, i+1)), 0); }
+        case 'IRR':   if (vals.length < 2) return NaN;
+                      { let r = 0.1;
+                        for (let k=0;k<40;k++) {
+                          let npv = 0, dnpv = 0;
+                          vals.forEach((cf,i)=>{ const t=i; npv += cf/Math.pow(1+r,t); if (t>0) dnpv -= t*cf/Math.pow(1+r,t+1); });
+                          if (Math.abs(dnpv) < 1e-9) break;
+                          const nr = r - (npv/dnpv);
+                          if (!isFinite(nr) || nr <= -0.9999) break;
+                          if (Math.abs(nr-r) < 1e-7) { r = nr; break; }
+                          r = nr;
+                        }
+                        return isFinite(r) ? r : NaN; }
+        case 'FLOW':  if (vals.length < 3) return NaN; return vals[0] * Math.pow(1 + vals[1], Math.trunc(vals[2]));
+        case 'COMPOUND': if (vals.length < 3) return NaN; return vals[0] * Math.pow(1 + vals[1], vals[2]);
+        case 'TREND': if (vals.length < 3) return NaN;
+                      { const x = vals[vals.length-1];
+                        const y = vals.slice(0,-1); const n = y.length;
+                        const xMean = (n+1)/2; const yMean = y.reduce((a,v)=>a+v,0)/n;
+                        let num=0, den=0;
+                        for (let i=0;i<n;i++) { const xi=i+1; num += (xi-xMean)*(y[i]-yMean); den += (xi-xMean)*(xi-xMean); }
+                        if (den===0) return NaN;
+                        const m = num/den; const b = yMean - m*xMean;
+                        return m*x + b; }
+        case 'PROJ':  if (vals.length < 3) return NaN; return vals[0] * Math.pow(1 + vals[1], vals[2]);
+        case 'SENS':  if (vals.length < 2) return NaN; return vals[0] * (1 + vals[1]);
+        case 'PMT':   if (vals.length < 3) return NaN;
+                      { const rate = vals[0], n = vals[1], pv = vals[2];
+                        if (n === 0) return NaN;
+                        if (rate === 0) return -(pv / n);
+                        return -(pv * rate) / (1 - Math.pow(1 + rate, -n)); }
+        case 'CAGR':  if (vals.length < 3 || vals[0] <= 0 || vals[1] <= 0 || vals[2] === 0) return NaN;
+                      return Math.pow(vals[1] / vals[0], 1 / vals[2]) - 1;
         default:      return NaN;
     }
 }
@@ -1351,6 +1253,8 @@ function fxBuildGrid() {
                 } else {
                     const rep = expr.replace(/[A-Z]{1,2}\d+/g, ref => {
                         const pos = parseRef(ref);
+                    const rep = expr.replace(/\$?[A-Z]{1,2}\$?\d+/gi, ref => {
+                        const pos = parseRef(ref.toUpperCase());
                         if (!pos) return '0';
                         const n = (flat[pos.r] || [])[pos.c];
                         return (n !== null && n !== undefined) ? String(n) : '0';
@@ -1358,6 +1262,9 @@ function fxBuildGrid() {
                     try {
                         if (/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(rep)) {
                             const v = Function('"use strict"; return (' + rep + ')')();
+                        const repNorm = rep.replace(/(\d),(\d)/g, '$1.$2');
+                        if (/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(repNorm)) {
+                            const v = Function('"use strict"; return (' + repNorm + ')')();
                             if (isFinite(v)) g[r][c] = v;
                         }
                     } catch(e) {}
@@ -1375,6 +1282,7 @@ function fxBuildGrid() {
 
 function evalFormula(expr) {
     expr = expr.trim();
+    expr = normalizeFormulaInput(expr.trim());
     if (expr[0] === '@') {
         const res = fxEval(expr);
         if (typeof res !== 'number' || !isFinite(res)) return '#ERR';
@@ -1383,11 +1291,23 @@ function evalFormula(expr) {
     let work = expr;
     let safety = 0;
     while (work.includes('@') && safety++ < 20) {
+    while (work.includes('@') && safety++ < 40) {
         const at = work.indexOf('@');
         let depth = 0, end = at;
         for (let i = at; i < work.length; i++) {
             if (work[i] === '(') depth++;
             else if (work[i] === ')') { depth--; if (depth === 0) { end = i; break; } }
+        const bare = work.slice(at).match(/^@[A-Z]+/i);
+        if (!bare) break;
+        let token = bare[0];
+        let end = at + token.length - 1;
+        if (work[at + token.length] === '(') {
+            let depth = 0;
+            for (let i = at; i < work.length; i++) {
+                if (work[i] === '(') depth++;
+                else if (work[i] === ')') { depth--; if (depth === 0) { end = i; break; } }
+            }
+            token = work.substring(at, end + 1);
         }
         const token = work.substring(at, end + 1);
         const res = fxEval(token);
@@ -1396,6 +1316,8 @@ function evalFormula(expr) {
     }
     const replaced = work.replace(/[A-Z]{1,2}\d+/g, ref => {
         const pos = parseRef(ref);
+    const replaced = work.replace(/\$?[A-Z]{1,2}\$?\d+/gi, ref => {
+        const pos = parseRef(ref.toUpperCase());
         if (!pos) return '0';
         const val = getCellValue(pos.r, pos.c);
         return (isNaN(val) || !isFinite(val)) ? '0' : val;
@@ -1403,6 +1325,9 @@ function evalFormula(expr) {
     try {
         if (!/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(replaced)) return '#ERR';
         const result = Function('"use strict"; return (' + replaced + ')')();
+        const replacedNorm = replaced.replace(/(\d),(\d)/g, '$1.$2');
+        if (!/^[\d\s\+\-\*\/\(\)\.\,]+$/.test(replacedNorm)) return '#ERR';
+        const result = Function('"use strict"; return (' + replacedNorm + ')')();
         return isFinite(result) ? result : '#DIV/0';
     } catch {
         return '#ERR';
@@ -1421,12 +1346,26 @@ function getCellValue(r, c) {
     }
     if (raw[0] === '=' || raw[0] === '+') {
         const expr = raw.slice(1);
+        const expr = raw[0] === '=' ? raw.slice(1) : raw;
         const v = evalFormula(expr);
         const n = Number(v);
         return (isNaN(n) || !isFinite(n)) ? 0 : n;
     }
     const n = parseFloat(raw.replace(',', '.'));
     return isNaN(n) ? 0 : n;
+}
+
+
+function normalizeFormulaInput(raw) {
+    if (!raw) return raw;
+    // Referencias/rangos: a1, $b$2, c3:d9 -> mayúsculas
+    let out = raw.replace(/\$?[a-z]{1,2}\$?\d+/g, m => m.toUpperCase());
+    // Forzar función con @ en mayúsculas (incluye llamadas sin paréntesis: @sum -> @SUM)
+    out = out.replace(/@([a-zA-Z]+)/g, (_, fn) => '@' + fn.toUpperCase());
+    // Funciones estilo Lotus/Excel/Findex en cualquier posición:
+    // @sum(a1:a10), =sum(a1:a10), +sum(a1:a10), ;sum(...), (sum(...)
+    out = out.replace(/(^|[=+\-*/(;,\s])@?([a-zA-Z]+)\s*\(/g, (_, pref, fn) => `${pref}@${fn.toUpperCase()}(`);
+    return out;
 }
 
 function getCellDisplay(r, c) {
@@ -1441,6 +1380,7 @@ function getCellDisplay(r, c) {
     }
     if (raw[0] === '=' || raw[0] === '+') {
         const expr = raw.slice(1);
+        const expr = raw[0] === '=' ? raw.slice(1) : raw;
         const v = evalFormula(expr);
         if (v === '#ERR' || v === '#DIV/0') return v;
         const n = Number(v);
@@ -1460,6 +1400,7 @@ function setCellData(r, c, raw) {
     let type;
     if (raw[0] === '"') { type = 'label'; raw = raw.slice(1); }
     else if (raw[0] === '=' || raw[0] === '+' || raw[0] === '@') { type = 'num'; }
+    else if (raw[0] === '=' || raw[0] === '+' || raw[0] === '@') { type = 'num'; raw = normalizeFormulaInput(raw); }
     else if (!isNaN(raw) && raw.trim() !== '') { type = 'num'; }
     else { type = 'label'; }
     cells[id] = { raw, type };
@@ -1483,11 +1424,118 @@ function buildGrid() {
         if (!m) return;
         moveTo(parseInt(m[1]), parseInt(m[2]));
     });
+
+    const rowFromHeader = rowH => {
+        const tr = rowH?.closest('tr');
+        const idx = tr ? [...elBody.querySelectorAll('tr')].indexOf(tr)-1 : -1;
+        return idx;
+    };
+    const colFromHeader = th => {
+        if (!th || th.classList.contains('corner')) return -1;
+        return [...th.parentElement.children].indexOf(th)-1;
+    };
+
+    elBody.addEventListener('mousedown', e => {
+        if (e.button !== 0) return;
+        const td = e.target.closest('td');
+        if (td) {
+            e.preventDefault();
+            const p = parseCellId(td.id); if (!p) return;
+            moveTo(p.r, p.c);
+            dragSel = { type:'cell', startR:p.r, startC:p.c, append:e.ctrlKey };
+            applySelectionRect(p.r, p.c, p.r, p.c, e.ctrlKey);
+            return;
+        }
+        const rowH = e.target.closest('th.row-h');
+        if (rowH) {
+            e.preventDefault();
+            const r = rowFromHeader(rowH);
+            if (r < 0) return;
+            dragSel = { type:'row', start:r, append:e.ctrlKey };
+            if (!e.ctrlKey) clearSelectionVisual();
+            for (let c=0;c<COLS;c++) applySelectionRect(r,c,r,c,true);
+            updateSelectionStatus();
+            return;
+        }
+        const th = e.target.closest('tr:first-child th');
+        const c = colFromHeader(th);
+        if (c >= 0) {
+            e.preventDefault();
+            dragSel = { type:'col', start:c, append:e.ctrlKey };
+            if (!e.ctrlKey) clearSelectionVisual();
+            for (let r=0;r<ROWS;r++) applySelectionRect(r,c,r,c,true);
+            updateSelectionStatus();
+        }
+    });
+
+    document.addEventListener('mousemove', e => {
+        if (!dragSel || (e.buttons & 1) !== 1) return;
+        const box = elScroll.getBoundingClientRect();
+        if (e.clientY > box.bottom - 16) elScroll.scrollTop += 12;
+        else if (e.clientY < box.top + 16) elScroll.scrollTop -= 12;
+        if (e.clientX > box.right - 16) elScroll.scrollLeft += 12;
+        else if (e.clientX < box.left + 16) elScroll.scrollLeft -= 12;
+
+        const hit = document.elementFromPoint(e.clientX, e.clientY);
+        if (!hit) return;
+
+        if (dragSel.type === 'cell') {
+            const td = hit.closest('td'); if (!td) return;
+            const p = parseCellId(td.id); if (!p) return;
+            applySelectionRect(dragSel.startR, dragSel.startC, p.r, p.c, dragSel.append);
+        } else if (dragSel.type === 'row') {
+            const rowH = hit.closest('th.row-h'); if (!rowH) return;
+            const r = rowFromHeader(rowH); if (r < 0) return;
+            if (!dragSel.append) clearSelectionVisual();
+            for (let rr=Math.min(dragSel.start,r); rr<=Math.max(dragSel.start,r); rr++) for (let c=0;c<COLS;c++) applySelectionRect(rr,c,rr,c,true);
+            updateSelectionStatus();
+        } else if (dragSel.type === 'col') {
+            const th = hit.closest('tr:first-child th');
+            const c = colFromHeader(th);
+            if (c < 0) return;
+            if (!dragSel.append) clearSelectionVisual();
+            for (let cc=Math.min(dragSel.start,c); cc<=Math.max(dragSel.start,c); cc++) for (let r=0;r<ROWS;r++) applySelectionRect(r,cc,r,cc,true);
+            updateSelectionStatus();
+        }
+    });
+
+    document.addEventListener('mouseup', () => { dragSel = null; });
 }
 
 function tdEl(r, c) { return document.getElementById(`c${r}_${c}`); }
 
 let prevActiveR = 0, prevActiveC = 0;
+let selectedIds = new Set();
+let dragSel = null;
+
+function clearSelectionVisual() {
+    selectedIds.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('sel'); });
+    selectedIds.clear();
+}
+function applySelectionRect(r1, c1, r2, c2, append=false) {
+    if (!append) clearSelectionVisual();
+    const rs = Math.min(r1,r2), re = Math.max(r1,r2);
+    const cs = Math.min(c1,c2), ce = Math.max(c1,c2);
+    for (let r=rs; r<=re; r++) for (let c=cs; c<=ce; c++) {
+        const id = `c${r}_${c}`;
+        selectedIds.add(id);
+        const el = document.getElementById(id);
+        if (el && !el.classList.contains('active')) el.classList.add('sel');
+    }
+    updateSelectionStatus();
+}
+function parseCellId(id){ const m=id.match(/^c(\d+)_(\d+)$/); return m?{r:+m[1],c:+m[2]}:null; }
+function updateSelectionStatus(){
+    const sbRange = document.getElementById('sb-range');
+    const sbCnt = document.getElementById('sb-cnt');
+    if (!sbRange || !sbCnt) return;
+    if (!selectedIds.size) { sbRange.textContent = cellId(curRow, curCol); sbCnt.textContent = Object.keys(cells).length + ' celda' + (Object.keys(cells).length!==1?'s':''); return; }
+    const pts=[...selectedIds].map(parseCellId).filter(Boolean);
+    const minR=Math.min(...pts.map(p=>p.r)), maxR=Math.max(...pts.map(p=>p.r));
+    const minC=Math.min(...pts.map(p=>p.c)), maxC=Math.max(...pts.map(p=>p.c));
+    sbRange.textContent = `${cellId(minR,minC)}:${cellId(maxR,maxC)}`;
+    sbCnt.textContent = `${selectedIds.size} seleccionada${selectedIds.size!==1?'s':''}`;
+}
 
 function renderCell(r, c) {
     const el = tdEl(r, c);
@@ -1508,6 +1556,7 @@ function setActive(r, c) {
     }
     const next = tdEl(r, c);
     if (next) next.classList.add('active');
+    if (next) { next.classList.remove('sel'); next.classList.add('active'); }
     prevActiveR = r; prevActiveC = c;
     // Highlight col/row headers
     const firstRow = elBody.querySelector('tr:first-child');
@@ -1533,10 +1582,7 @@ function scrollToCursor() {
     const cont = elScroll.getBoundingClientRect();
     const visTop = cont.top + HEADER_TOP, visLeft = cont.left + HEADER_LEFT;
     if (box.top < visTop) elScroll.scrollTop -= (visTop - box.top);
-    else if (box.bottom > cont.bottom) elScroll.scrollTop += (box.bottom - cont.bottom);
-    if (box.left < visLeft) elScroll.scrollLeft -= (visLeft - box.left);
-    else if (box.right > cont.right) elScroll.scrollLeft += (box.right - cont.right);
-}
+@@ -1540,51 +1707,52 @@ function scrollToCursor() {
 
 // ── UI updates ──
 function updateTopBar() {
@@ -1563,6 +1609,8 @@ function updateTopBar() {
     if (sbRef) sbRef.textContent = id;
     if (sbVal) sbVal.textContent = getCellDisplay(curRow, curCol) || '—';
     if (sbCnt) { const n = Object.keys(cells).length; sbCnt.textContent = n + ' celda' + (n!==1?'s':''); }
+    if (sbCnt && !selectedIds.size) { const n = Object.keys(cells).length; sbCnt.textContent = n + ' celda' + (n!==1?'s':''); }
+    updateSelectionStatus();
     // Stats
     const siUsed = document.getElementById('si-used');
     const siFml  = document.getElementById('si-fml');
@@ -1588,14 +1636,7 @@ function updateModeLabel() {
 }
 
 // ── Movimiento ──
-function moveTo(r, c) {
-    if (r < 0) r = 0; if (r >= ROWS) r = ROWS-1;
-    if (c < 0) c = 0; if (c >= COLS) c = COLS-1;
-    curRow = r; curCol = c;
-    setActive(r, c);
-    scrollToCursor();
-    updateTopBar();
-}
+@@ -1599,51 +1767,55 @@ function moveTo(r, c) {
 
 // ── Entrada ──
 function startEntry(firstChar) {
@@ -1622,6 +1663,11 @@ function renderFormulas() {
 
 function confirmEntry(moveRow=1, moveCol=0) {
     const raw = elEntry.value.trim();
+    let raw = elEntry.value.trim();
+    if (raw && (raw[0] === '=' || raw[0] === '+' || raw[0] === '@')) {
+        raw = normalizeFormulaInput(raw);
+        elEntry.value = raw;
+    }
     setCellData(curRow, curCol, raw);
     renderCell(curRow, curCol);
     setActive(curRow, curCol);
@@ -1647,84 +1693,7 @@ function deleteCell() {
     renderCell(curRow, curCol);
     setActive(curRow, curCol);
     renderFormulas();
-    updateTopBar();
-}
-
-function recalcAll() {
-    renderFormulas();
-    updateTopBar();
-    toast('Recalculado','ok');
-}
-
-// ── Navegación Lotus ──
-const pgHeld = new Set();
-function pageSize() {
-    const rowH = tdEl(0,0)?.getBoundingClientRect().height || 20;
-    return Math.max(1, Math.floor(elScroll.clientHeight / rowH) - 1);
-}
-document.addEventListener('keyup', e => { pgHeld.delete(e.key); });
-
-let endMode = false, endTimeout = null;
-function activateEndMode() {
-    endMode = true;
-    elMode.textContent = 'FIN'; elMode.className = 'cmd';
-    clearTimeout(endTimeout);
-    endTimeout = setTimeout(cancelEndMode, 2000);
-}
-function cancelEndMode() {
-    endMode = false; clearTimeout(endTimeout); updateModeLabel();
-}
-
-function lotusJump(dr, dc) {
-    cancelEndMode();
-    let r = curRow, c = curCol;
-    const hasData = (row, col) =>
-        row>=0 && row<ROWS && col>=0 && col<COLS && !!getCellRaw(row, col);
-    if (hasData(r, c)) {
-        while (hasData(r+dr, c+dc) && r+dr>=0 && r+dr<ROWS && c+dc>=0 && c+dc<COLS) { r+=dr; c+=dc; }
-        moveTo(r, c);
-    } else {
-        r+=dr; c+=dc;
-        while (r>=0 && r<ROWS && c>=0 && c<COLS && !hasData(r,c)) { r+=dr; c+=dc; }
-        if (r>=0 && r<ROWS && c>=0 && c<COLS) moveTo(r, c);
-        else moveTo(dr>0?ROWS-1:dr<0?0:curRow, dc>0?COLS-1:dc<0?0:curCol);
-    }
-}
-
-function lastUsedCell() {
-    let maxR=0, maxC=0;
-    for (const id of Object.keys(cells)) {
-        const pos = parseRef(id); if (!pos) continue;
-        if (pos.r > maxR) maxR = pos.r;
-        if (pos.c > maxC) maxC = pos.c;
-    }
-    moveTo(maxR, maxC);
-}
-
-// ── Teclado READY ──
-document.addEventListener('keydown', e => {
-    if (mode === 'ENTRY') { handleKeyEntry(e); return; }
-    if (endMode) {
-        e.preventDefault();
-        switch (e.key) {
-            case 'ArrowDown':  lotusJump( 1, 0); break;
-            case 'ArrowUp':    lotusJump(-1, 0); break;
-            case 'ArrowRight': lotusJump( 0, 1); break;
-            case 'ArrowLeft':  lotusJump( 0,-1); break;
-            case 'Home':       cancelEndMode(); lastUsedCell(); break;
-            case 'End':        cancelEndMode(); break;
-            default:           cancelEndMode(); break;
-        }
-        return;
-    }
-    switch (e.key) {
-        case 'ArrowUp': case 'ArrowDown': case 'ArrowLeft': case 'ArrowRight': {
-            e.preventDefault();
-            const dr = e.key==='ArrowDown'?1 : e.key==='ArrowUp'?-1 : 0;
-            const dc = e.key==='ArrowRight'?1 : e.key==='ArrowLeft'?-1 : 0;
-            if (pgHeld.size > 0) moveTo(dr!==0?(dr>0?ROWS-1:0):curRow, dc!==0?(dc>0?COLS-1:0):curCol);
-            else if (e.ctrlKey) lotusJump(dr, dc);
-            else moveTo(curRow+dr, curCol+dc);
+@@ -1728,113 +1900,152 @@ document.addEventListener('keydown', e => {
             break;
         }
         case 'Tab': e.preventDefault(); moveTo(curRow, curCol+(e.shiftKey?-1:1)); break;
@@ -1751,7 +1720,36 @@ function handleKeyEntry(e) {
     }
 }
 elEntry.addEventListener('input', () => { if (mode==='ENTRY') editBuf=elEntry.value; });
+elEntry.addEventListener('input', () => {
+    if (mode!=='ENTRY') return;
+    const before = elEntry.value;
+    const pos = elEntry.selectionStart ?? before.length;
+    let next = before;
+    if (before && (before[0] === '=' || before[0] === '+' || before[0] === '@')) {
+        next = normalizeFormulaInput(before);
+    }
+    if (next !== before) {
+        const delta = next.length - before.length;
+        elEntry.value = next;
+        const np = Math.max(0, pos + delta);
+        elEntry.setSelectionRange(np, np);
+    }
+    editBuf = elEntry.value;
+});
 
+
+elEntry.addEventListener('keyup', () => {
+    if (mode!=='ENTRY') return;
+    const before = elEntry.value;
+    if (before && (before[0] === '=' || before[0] === '+' || before[0] === '@')) {
+        const next = normalizeFormulaInput(before);
+        if (next !== before) {
+            const pos = elEntry.selectionStart ?? next.length;
+            elEntry.value = next;
+            elEntry.setSelectionRange(pos, pos);
+        }
+    }
+});
 // ══════════════════════════════════════════════════════════
 //  UI HELPERS
 // ══════════════════════════════════════════════════════════
@@ -1768,12 +1766,26 @@ function toast(msg, type='ok') {
     _tT = setTimeout(() => el.classList.remove('on'), 2600);
 }
 
+
+function applyTheme(theme) {
+    document.body.classList.toggle('light', theme === 'light');
+    const i = document.querySelector('#theme-toggle i');
+    if (i) i.className = theme === 'light' ? 'mdi mdi-weather-sunny' : 'mdi mdi-weather-night';
+    localStorage.setItem('findex-theme', theme);
+}
+function toggleTheme() {
+    const next = document.body.classList.contains('light') ? 'dark' : 'light';
+    applyTheme(next);
+    toast('Tema ' + (next === 'light' ? 'claro' : 'oscuro') + ' activo','ok');
+}
+
 // Panel
 function closePanel() {
     document.getElementById('rpanel').classList.add('closed');
     document.getElementById('rb-panel').classList.remove('active-btn');
     const rb2 = document.getElementById('rb-panel2');
     if (rb2) rb2.classList.remove('active-btn');
+    toast('Panel IA fijo: permanece visible para contexto continuo','warn');
 }
 function openPanel() {
     document.getElementById('rpanel').classList.remove('closed');
@@ -1784,6 +1796,8 @@ function openPanel() {
 function togglePanel() {
     const rp = document.getElementById('rpanel');
     rp.classList.contains('closed') ? openPanel() : closePanel();
+    openPanel();
+    toast('Panel IA siempre activo','warn');
 }
 
 // Tabs del panel
@@ -1830,6 +1844,7 @@ function exportCSV() {
 }
 
 // ── Init ──
+applyTheme(localStorage.getItem('findex-theme') || 'dark');
 buildGrid();
 setActive(0, 0);
 moveTo(0, 0);
